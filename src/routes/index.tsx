@@ -1,20 +1,29 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Search, ShieldCheck, Zap, Globe2, Server, Sparkles, Check } from "lucide-react";
-import heroImage from "@/assets/hero-nodes.jpg";
+import { createFileRoute } from "@tanstack/react-router";
+import {
+  ArrowRight,
+  Check,
+  ShieldCheck,
+  Zap,
+  Globe,
+  Server,
+  Terminal,
+  Sparkles,
+} from "lucide-react";
+import serverRack from "@/assets/server-rack.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "NodeKPT — Marketplace VPS Premium di Indonesia" },
+      { title: "NodeKPT — Marketplace VPS Premium" },
       {
         name: "description",
         content:
-          "Temukan VPS terbaik dari seller terverifikasi. Marketplace VPS, Winstaller, dan Hypervisor dalam satu platform yang elegan dan terpercaya.",
+          "VPS kelas dunia dari seller terverifikasi. Marketplace VPS, Winstaller, dan Hypervisor dalam satu platform yang elegan dan terpercaya.",
       },
       { property: "og:title", content: "NodeKPT — Marketplace VPS Premium" },
       {
         property: "og:description",
-        content: "Find the right VPS in minutes. 150+ VPS, 25+ seller terverifikasi, uptime 99.9%.",
+        content: "VPS premium dari seller terverifikasi. Deploy dalam hitungan menit.",
       },
     ],
   }),
@@ -23,44 +32,27 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <PromoBar />
+    <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
       <Nav />
       <Hero />
-      <Stats />
+      <Locations />
+      <Pricing />
       <Features />
-      <Marketplace />
-      <Trust />
       <CTA />
       <Footer />
     </div>
   );
 }
 
-function PromoBar() {
-  return (
-    <div className="bg-ink text-cream">
-      <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-6 py-2.5 text-xs tracking-wide">
-        <Sparkles className="h-3.5 w-3.5 text-[var(--gold)]" />
-        <span className="opacity-90">
-          Promo pembukaan — diskon <span className="text-[var(--gold)] font-medium">20%</span> untuk pesanan pertama
-        </span>
-        <span className="hidden sm:inline rounded-full border border-white/15 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] opacity-80">
-          New 2026
-        </span>
-      </div>
-    </div>
-  );
-}
-
+/* ----------------------------- NAV ----------------------------- */
 function Nav() {
-  const items = ["Marketplace", "Winstaller", "Hypervisor", "Fitur", "Harga", "Jadi Seller"];
+  const items = ["Marketplace", "Winstaller", "Hypervisor", "Fitur", "Harga"];
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link to="/" className="flex items-center gap-2.5">
-          <div className="grid h-9 w-9 place-items-center rounded-lg bg-ink text-cream shadow-[var(--shadow-soft)]">
-            <span className="font-serif text-lg italic leading-none">N</span>
+        <a href="/" className="flex items-center gap-2.5">
+          <div className="grid h-9 w-9 place-items-center rounded-lg border border-gold/30 bg-gradient-to-br from-gold-soft/20 to-transparent">
+            <span className="font-serif text-lg italic leading-none text-gold">N</span>
           </div>
           <div className="leading-tight">
             <div className="font-serif text-xl tracking-tight">NodeKPT</div>
@@ -68,7 +60,7 @@ function Nav() {
               VPS · Marketplace
             </div>
           </div>
-        </Link>
+        </a>
         <nav className="hidden items-center gap-8 md:flex">
           {items.map((label) => (
             <a
@@ -81,11 +73,12 @@ function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <button className="hidden rounded-full px-4 py-2 text-sm text-foreground transition-colors hover:bg-muted sm:inline-flex">
+          <button className="hidden rounded-full px-4 py-2 text-sm text-foreground/90 transition-colors hover:bg-muted sm:inline-flex">
             Log in
           </button>
-          <button className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm text-cream shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5">
-            Mulai Gratis <ArrowRight className="h-3.5 w-3.5" />
+          <button className="group inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-gold-soft to-gold-deep px-4 py-2 text-sm font-medium text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:-translate-y-0.5">
+            Mulai Gratis
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
           </button>
         </div>
       </div>
@@ -93,256 +86,244 @@ function Nav() {
   );
 }
 
+/* ----------------------------- HERO ----------------------------- */
 function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-noise opacity-60" aria-hidden />
-      <div className="absolute -top-40 left-1/2 h-[520px] w-[920px] -translate-x-1/2 rounded-full bg-[var(--emerald-deep)]/10 blur-3xl" aria-hidden />
+      {/* Backgrounds */}
+      <div className="constellation absolute inset-0" aria-hidden />
+      <div className="radial-glow absolute left-1/2 top-1/3 h-[700px] w-[1100px] -translate-x-1/2 -translate-y-1/2" aria-hidden />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-6 pt-20 pb-24 lg:grid-cols-[1.05fr_1fr] lg:pt-28 lg:pb-32">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-6 pt-20 pb-24 lg:grid-cols-[1.1fr_1fr] lg:pt-28 lg:pb-32">
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-xs text-muted-foreground shadow-[var(--shadow-soft)] backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--emerald-deep)]" />
-            Marketplace VPS terkurasi — 25+ seller terverifikasi
+          <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-gold-soft">
+            <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_8px_var(--gold)]" />
+            Marketplace VPS Premium
           </div>
 
-          <h1 className="mt-6 font-serif text-[clamp(2.75rem,6vw,4.75rem)] leading-[1.02] tracking-tight">
-            VPS premium,
+          <h1 className="mt-7 font-serif text-[clamp(2.75rem,6.5vw,5.5rem)] leading-[1.02] tracking-tight">
+            VPS kelas dunia,
             <br />
-            <span className="italic text-gradient-luxe">dipilih dengan cermat.</span>
+            <span className="italic text-gold-gradient">dikurasi</span>{" "}
+            <span className="text-foreground/95">untuk Anda.</span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            NodeKPT menyatukan VPS, Winstaller, dan Hypervisor dalam satu tempat —
-            ditenagai oleh penyedia terpercaya, dengan harga transparan dan dukungan
-            yang responsif.
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
+            NodeKPT menghubungkan Anda dengan seller VPS terverifikasi di seluruh
+            dunia — performa enterprise, harga jujur, deploy dalam hitungan menit.
           </p>
 
-          {/* Search */}
-          <div className="mt-8 flex max-w-xl items-center gap-2 rounded-full border border-border bg-card p-1.5 shadow-[var(--shadow-lift)]">
-            <div className="flex flex-1 items-center gap-3 pl-4">
-              <Search className="h-4 w-4 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Cari VPS, lokasi, atau seller…"
-                className="w-full bg-transparent py-2 text-sm outline-none placeholder:text-muted-foreground"
-              />
-            </div>
-            <button className="rounded-full bg-ink px-5 py-2.5 text-sm text-cream transition-transform hover:-translate-y-0.5">
-              Telusuri
+          <div className="mt-9 flex flex-wrap gap-3">
+            <button className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-gold-soft to-gold-deep px-6 py-3.5 text-sm font-medium text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:-translate-y-0.5">
+              Jelajahi Marketplace
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </button>
+            <button className="inline-flex items-center gap-2 rounded-xl border border-border bg-card/60 px-6 py-3.5 text-sm text-foreground/90 backdrop-blur transition-colors hover:bg-card">
+              <Terminal className="h-4 w-4 text-gold" />
+              Lihat Live Demo
             </button>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
-            {["Jakarta", "Singapore", "Tokyo", "Frankfurt", "New York"].map((c) => (
-              <span key={c} className="inline-flex items-center gap-1.5">
-                <Globe2 className="h-3 w-3" /> {c}
-              </span>
+          <ul className="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-sm text-muted-foreground">
+            {["Tanpa kontrak", "Pembayaran lokal", "Refund 7 hari"].map((p) => (
+              <li key={p} className="inline-flex items-center gap-2">
+                <Check className="h-4 w-4 text-gold" />
+                {p}
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
-        {/* Visual */}
-        <div className="relative">
-          <div className="relative aspect-[5/6] overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-lift)]">
-            <img
-              src={heroImage}
-              alt="Visualisasi jaringan node VPS premium"
-              width={1600}
-              height={1200}
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/40 to-transparent p-6">
-              <div className="flex items-end justify-between text-cream">
-                <div>
-                  <div className="text-[10px] uppercase tracking-[0.22em] opacity-70">
-                    Featured Node
-                  </div>
-                  <div className="mt-1 font-serif text-2xl">Bare Metal · Tokyo</div>
-                  <div className="text-xs opacity-75">8 vCPU · 32 GB · NVMe</div>
-                </div>
-                <div className="text-right">
-                  <div className="text-[10px] uppercase tracking-[0.22em] opacity-70">Mulai</div>
-                  <div className="font-serif text-2xl text-[var(--gold)]">Rp 120rb</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute -left-6 -bottom-6 hidden w-56 rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-lift)] md:block">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <ShieldCheck className="h-4 w-4 text-[var(--emerald-deep)]" />
-              Uptime 90 hari
-            </div>
-            <div className="mt-1 font-serif text-3xl">99.97%</div>
-            <div className="mt-3 flex h-1.5 gap-0.5">
-              {Array.from({ length: 24 }).map((_, i) => (
-                <span
-                  key={i}
-                  className="flex-1 rounded-sm"
-                  style={{
-                    background:
-                      i === 17
-                        ? "var(--gold)"
-                        : "var(--emerald-deep)",
-                    opacity: i === 17 ? 1 : 0.85,
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+        {/* Terminal visual */}
+        <TerminalCard />
       </div>
     </section>
   );
 }
 
-function Stats() {
-  const items = [
-    { k: "150+", v: "VPS tersedia" },
-    { k: "25+", v: "Seller terverifikasi" },
-    { k: "5", v: "Lokasi server" },
-    { k: "99.9%", v: "Uptime rata-rata" },
-  ];
+function TerminalCard() {
   return (
-    <section className="border-y border-border bg-card">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 divide-border md:grid-cols-4 md:divide-x">
-        {items.map((it) => (
-          <div key={it.v} className="px-6 py-10 text-center md:py-12">
-            <div className="font-serif text-4xl md:text-5xl tracking-tight">{it.k}</div>
-            <div className="mt-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-              {it.v}
-            </div>
+    <div className="relative">
+      <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-gold/20 via-transparent to-transparent blur-2xl" aria-hidden />
+      <div className="relative overflow-hidden rounded-2xl border border-border bg-card/80 shadow-[var(--shadow-lift)] backdrop-blur-xl">
+        {/* Title bar */}
+        <div className="flex items-center justify-between border-b border-border px-5 py-3">
+          <div className="flex items-center gap-2">
+            <span className="h-3 w-3 rounded-full bg-red-500/70" />
+            <span className="h-3 w-3 rounded-full bg-yellow-500/70" />
+            <span className="h-3 w-3 rounded-full bg-green-500/70" />
           </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Features() {
-  const features = [
-    {
-      icon: Server,
-      title: "Marketplace terkurasi",
-      desc: "Setiap seller melewati proses verifikasi sebelum dapat menjual. Anda hanya melihat penyedia yang benar-benar layak dipercaya.",
-    },
-    {
-      icon: Zap,
-      title: "Winstaller instan",
-      desc: "Pasang Windows pada VPS Linux apa pun hanya dengan beberapa klik. Tanpa ribet, tanpa konfigurasi rumit.",
-    },
-    {
-      icon: ShieldCheck,
-      title: "Pembayaran aman",
-      desc: "Dana ditahan hingga layanan terverifikasi aktif. Refund otomatis bila terjadi masalah pada pemesanan.",
-    },
-  ];
-  return (
-    <section id="fitur" className="mx-auto max-w-7xl px-6 py-24 md:py-32">
-      <div className="max-w-2xl">
-        <div className="text-xs uppercase tracking-[0.22em] text-[var(--emerald-deep)]">
-          Mengapa NodeKPT
+          <div className="text-xs text-muted-foreground">nodekpt — deploy.sh</div>
+          <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            v2.4
+          </div>
         </div>
-        <h2 className="mt-4 font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-          Dirancang untuk profesional yang menuntut <em>ketenangan</em>.
-        </h2>
-      </div>
 
-      <div className="mt-14 grid gap-6 md:grid-cols-3">
-        {features.map(({ icon: Icon, title, desc }) => (
-          <article
-            key={title}
-            className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
-          >
-            <div className="grid h-11 w-11 place-items-center rounded-lg bg-ink text-cream">
-              <Icon className="h-5 w-5" />
+        {/* Code */}
+        <div className="font-mono text-[13px] leading-relaxed p-6 space-y-2">
+          <p>
+            <span className="text-gold">$</span> curl -s install.nodekpt.com | bash
+          </p>
+          <p className="text-muted-foreground">→ Resolving nearest node: Jakarta-1</p>
+          <p className="text-muted-foreground">
+            → Provisioning <span className="text-foreground">4 vCPU</span> ·{" "}
+            <span className="text-foreground">8 GB RAM</span> ·{" "}
+            <span className="text-foreground">160 GB NVMe</span>
+          </p>
+          <p className="text-muted-foreground">
+            → Hardening firewall · enabling SSH keys
+          </p>
+          <p className="pt-1">
+            <span className="text-green-400">[ ok ]</span>{" "}
+            <span className="text-foreground">VPS ready in 42s</span>{" "}
+            <span className="text-muted-foreground">· uptime 99.97%</span>
+          </p>
+          <p className="text-muted-foreground">
+            $ endpoint: <span className="text-gold">203.0.113.18</span>
+          </p>
+        </div>
+
+        {/* Latency badge */}
+        <div className="absolute bottom-5 left-5 rounded-xl border border-border bg-background/90 px-4 py-3 backdrop-blur">
+          <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+            Latency
+          </div>
+          <div className="font-serif text-3xl leading-tight">12 ms</div>
+          <div className="text-[10px] text-muted-foreground">Asia · rata-rata</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ----------------------------- LOCATIONS ----------------------------- */
+function Locations() {
+  const cities = ["Jakarta", "Singapore", "Tokyo", "Frankfurt", "New York", "London"];
+  return (
+    <section className="border-y border-border bg-background/40">
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="text-center text-[11px] uppercase tracking-[0.32em] text-muted-foreground">
+          Tersedia di lokasi pilihan
+        </div>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-4 md:gap-x-16">
+          {cities.map((c) => (
+            <div
+              key={c}
+              className="font-serif text-2xl text-foreground/55 transition-colors hover:text-foreground md:text-3xl"
+            >
+              {c}
             </div>
-            <h3 className="mt-6 font-serif text-2xl tracking-tight">{title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{desc}</p>
-            <div className="absolute right-6 top-6 h-1.5 w-1.5 rounded-full bg-[var(--gold)] opacity-0 transition-opacity group-hover:opacity-100" />
-          </article>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-function Marketplace() {
-  const items = [
+/* ----------------------------- PRICING ----------------------------- */
+function Pricing() {
+  const plans = [
     {
-      tag: "Singapore",
-      title: "VPS Cloud · Performance",
+      tag: "Jakarta · ID",
+      name: "Starter",
+      specs: "2 vCPU · 4 GB · 80 GB NVMe",
+      chips: ["KVM", "1 Gbps", "Anti-DDoS"],
+      price: "Rp 65rb",
+      featured: false,
+    },
+    {
+      tag: "Singapore · SG",
+      name: "Pro",
       specs: "4 vCPU · 8 GB · 160 GB NVMe",
-      price: "Rp 95rb",
-      seller: "NimbusHost",
+      chips: ["KVM", "Dedicated IP", "Snapshots"],
+      price: "Rp 145rb",
+      featured: true,
     },
     {
-      tag: "Jakarta",
-      title: "VPS KVM · Standard",
-      specs: "2 vCPU · 4 GB · 80 GB SSD",
-      price: "Rp 45rb",
-      seller: "BumiNode",
-    },
-    {
-      tag: "Tokyo",
-      title: "Bare Metal · Pro",
-      specs: "8 vCPU · 32 GB · 1 TB NVMe",
-      price: "Rp 380rb",
-      seller: "SakuraOps",
+      tag: "Tokyo · JP",
+      name: "Scale",
+      specs: "8 vCPU · 16 GB · 320 GB NVMe",
+      chips: ["NVMe Gen4", "AMD EPYC", "Backup"],
+      price: "Rp 320rb",
+      featured: false,
     },
   ];
+
   return (
-    <section id="marketplace" className="border-t border-border bg-secondary/40">
+    <section id="harga" className="relative">
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
-        <div className="flex items-end justify-between gap-6">
-          <div className="max-w-xl">
-            <div className="text-xs uppercase tracking-[0.22em] text-[var(--emerald-deep)]">
-              Pilihan minggu ini
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <div className="text-[11px] uppercase tracking-[0.32em] text-gold">
+              Harga
             </div>
-            <h2 className="mt-4 font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-              Penawaran terbaik dari seller pilihan.
+            <h2 className="mt-4 font-serif text-4xl leading-tight tracking-tight md:text-6xl">
+              Performa premium,
+              <br />
+              untuk <span className="italic text-gold-gradient">setiap skala</span>.
             </h2>
           </div>
           <a
-            href="#marketplace"
-            className="hidden items-center gap-1.5 text-sm text-foreground hover:gap-2.5 transition-all sm:inline-flex"
+            href="#harga"
+            className="inline-flex items-center gap-1.5 text-sm text-gold hover:gap-2.5 transition-all"
           >
-            Lihat semua <ArrowRight className="h-4 w-4" />
+            Lihat semua paket <ArrowRight className="h-4 w-4" />
           </a>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {items.map((it) => (
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {plans.map((p) => (
             <article
-              key={it.title}
-              className="group flex flex-col rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+              key={p.name}
+              className={`relative flex flex-col rounded-2xl border p-7 transition-all hover:-translate-y-1 ${
+                p.featured
+                  ? "border-gold/40 bg-gradient-to-b from-gold/[0.06] to-card shadow-[var(--shadow-gold)]"
+                  : "border-border bg-card/60 hover:border-gold/30"
+              }`}
             >
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground">
-                  <Globe2 className="h-3 w-3" /> {it.tag}
-                </span>
-                <span className="text-[11px] uppercase tracking-[0.18em] text-[var(--emerald-deep)]">
-                  Verified
-                </span>
-              </div>
-              <h3 className="mt-6 font-serif text-2xl tracking-tight">{it.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{it.specs}</p>
-
-              <div className="my-6 h-px w-full bg-border" />
-
-              <div className="flex items-end justify-between">
-                <div>
-                  <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                    by {it.seller}
-                  </div>
-                  <div className="mt-1 font-serif text-3xl">
-                    {it.price}
-                    <span className="text-sm text-muted-foreground"> /bln</span>
-                  </div>
+              <div className="flex items-start justify-between">
+                <div className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                  {p.tag}
                 </div>
-                <button className="rounded-full border border-ink bg-transparent px-4 py-2 text-sm text-foreground transition-colors hover:bg-ink hover:text-cream">
-                  Pesan
+                {p.featured && (
+                  <span className="rounded-full border border-gold/40 bg-gold/10 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.18em] text-gold">
+                    Paling Laku
+                  </span>
+                )}
+              </div>
+
+              <h3 className="mt-4 font-serif text-3xl tracking-tight">{p.name}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{p.specs}</p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {p.chips.map((c) => (
+                  <span
+                    key={c}
+                    className="rounded-full border border-border bg-background/40 px-3 py-1 text-[11px] text-muted-foreground"
+                  >
+                    {c}
+                  </span>
+                ))}
+              </div>
+
+              <div className="my-7 h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
+
+              <div className="mt-auto flex items-end justify-between gap-3">
+                <div>
+                  <div className="font-serif text-4xl text-gold-gradient">
+                    {p.price}
+                  </div>
+                  <div className="text-xs text-muted-foreground">per bulan</div>
+                </div>
+                <button
+                  className={`inline-flex items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm transition-all ${
+                    p.featured
+                      ? "bg-gradient-to-b from-gold-soft to-gold-deep text-primary-foreground shadow-[var(--shadow-gold)] hover:-translate-y-0.5"
+                      : "border border-border bg-background/40 text-foreground hover:border-gold/40 hover:text-gold"
+                  }`}
+                >
+                  Deploy <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               </div>
             </article>
@@ -353,105 +334,127 @@ function Marketplace() {
   );
 }
 
-function Trust() {
-  const pts = [
-    "Verifikasi seller berlapis",
-    "Escrow pembayaran otomatis",
-    "Refund instan bila gagal",
-    "Dukungan 24/7 berbahasa Indonesia",
+/* ----------------------------- FEATURES ----------------------------- */
+function Features() {
+  const items = [
+    {
+      icon: ShieldCheck,
+      title: "Seller terverifikasi",
+      desc: "Setiap seller melewati KYC dan audit performa berkala. Kualitas tidak diragukan.",
+    },
+    {
+      icon: Zap,
+      title: "Deploy instan",
+      desc: "Provisioning otomatis dalam hitungan detik dengan Winstaller eksklusif NodeKPT.",
+    },
+    {
+      icon: Globe,
+      title: "Lokasi global",
+      desc: "Pilih dari 5+ region utama Asia, Eropa, dan Amerika dengan latensi terendah.",
+    },
+    {
+      icon: Server,
+      title: "Hardware NVMe Gen4",
+      desc: "AMD EPYC, NVMe Gen4, dan jaringan 10 Gbps di semua paket Pro ke atas.",
+    },
   ];
-  return (
-    <section className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-24 md:grid-cols-2 md:py-32">
-      <div>
-        <div className="text-xs uppercase tracking-[0.22em] text-[var(--emerald-deep)]">
-          Kepercayaan
-        </div>
-        <h2 className="mt-4 font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-          Standar yang tidak <em>berkompromi</em>.
-        </h2>
-        <p className="mt-5 max-w-lg text-muted-foreground">
-          Kami percaya marketplace yang baik dibangun di atas kepercayaan. Setiap
-          detail — dari verifikasi seller hingga proses pembayaran — dirancang untuk
-          melindungi Anda.
-        </p>
-        <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-          {pts.map((p) => (
-            <li key={p} className="flex items-center gap-2.5 text-sm">
-              <span className="grid h-5 w-5 place-items-center rounded-full bg-[var(--emerald-deep)]/10 text-[var(--emerald-deep)]">
-                <Check className="h-3 w-3" />
-              </span>
-              {p}
-            </li>
-          ))}
-        </ul>
-      </div>
 
-      <figure className="relative overflow-hidden rounded-3xl border border-border bg-ink p-10 text-cream shadow-[var(--shadow-lift)]">
-        <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--emerald-deep)]/30 blur-3xl" />
-        <blockquote className="relative font-serif text-2xl leading-snug md:text-3xl">
-          “NodeKPT mengubah cara saya membeli VPS. Tidak ada lagi tebak-tebakan —
-          hanya seller yang benar-benar bisa diandalkan.”
-        </blockquote>
-        <figcaption className="relative mt-8 flex items-center gap-3 text-sm">
-          <div className="grid h-10 w-10 place-items-center rounded-full bg-cream/10 font-serif italic">
-            R
+  return (
+    <section id="fitur" className="relative border-t border-border bg-card/30">
+      <div className="mx-auto grid max-w-7xl items-center gap-16 px-6 py-24 md:grid-cols-2 md:py-32">
+        <div className="relative">
+          <div className="absolute inset-0 -m-8 rounded-[2rem] bg-gradient-to-br from-gold/15 via-transparent to-transparent blur-3xl" aria-hidden />
+          <div className="relative overflow-hidden rounded-3xl border border-border bg-background">
+            <img
+              src={serverRack}
+              alt="Server rack premium NodeKPT"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
           </div>
-          <div>
-            <div>Rian Pradana</div>
-            <div className="text-cream/60 text-xs">Founder, Cendekia Cloud</div>
+        </div>
+
+        <div>
+          <div className="text-[11px] uppercase tracking-[0.32em] text-gold">Fitur</div>
+          <h2 className="mt-4 font-serif text-4xl leading-tight tracking-tight md:text-6xl">
+            Infrastruktur yang
+            <br />
+            <span className="italic text-gold-gradient">tak perlu diragukan</span>.
+          </h2>
+          <p className="mt-5 max-w-md text-muted-foreground">
+            Kami merancang NodeKPT untuk profesional yang menuntut performa,
+            keandalan, dan transparansi — tanpa kompromi.
+          </p>
+
+          <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
+            {items.map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="bg-card p-6">
+                <div className="grid h-10 w-10 place-items-center rounded-lg border border-gold/30 bg-gold/5">
+                  <Icon className="h-4.5 w-4.5 text-gold" />
+                </div>
+                <h3 className="mt-5 font-serif text-xl tracking-tight">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {desc}
+                </p>
+              </div>
+            ))}
           </div>
-        </figcaption>
-      </figure>
+        </div>
+      </div>
     </section>
   );
 }
 
+/* ----------------------------- CTA ----------------------------- */
 function CTA() {
   return (
-    <section className="mx-auto max-w-7xl px-6 pb-24 md:pb-32">
-      <div className="relative overflow-hidden rounded-3xl bg-ink px-8 py-16 text-cream md:px-16 md:py-24">
-        <div className="absolute inset-0 bg-noise opacity-30" aria-hidden />
-        <div className="absolute -left-32 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-[var(--emerald-deep)]/30 blur-3xl" />
-        <div className="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[var(--gold)]/15 blur-3xl" />
+    <section className="relative overflow-hidden border-t border-border">
+      <div className="constellation absolute inset-0 opacity-60" aria-hidden />
+      <div className="absolute left-1/2 top-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/10 blur-3xl" aria-hidden />
 
-        <div className="relative max-w-2xl">
-          <h2 className="font-serif text-4xl leading-tight tracking-tight md:text-6xl">
-            Temukan VPS Anda <em className="text-[var(--gold)]">hari ini</em>.
-          </h2>
-          <p className="mt-5 text-cream/75 md:text-lg">
-            Daftar gratis dan jelajahi marketplace dengan ratusan VPS dari seller
-            terverifikasi di seluruh dunia.
-          </p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <button className="inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-medium text-ink transition-transform hover:-translate-y-0.5">
-              Mulai gratis <ArrowRight className="h-4 w-4" />
-            </button>
-            <button className="rounded-full border border-cream/25 px-6 py-3 text-sm text-cream/90 transition-colors hover:bg-cream/10">
-              Jadi seller
-            </button>
-          </div>
+      <div className="relative mx-auto max-w-3xl px-6 py-28 text-center md:py-36">
+        <Sparkles className="mx-auto h-6 w-6 text-gold" />
+        <h2 className="mt-6 font-serif text-4xl leading-tight tracking-tight md:text-6xl">
+          Siap memulai dengan
+          <br />
+          <span className="italic text-gold-gradient">NodeKPT</span>?
+        </h2>
+        <p className="mt-6 text-muted-foreground md:text-lg">
+          Buat akun gratis, jelajahi marketplace, dan deploy VPS pertama Anda hari ini.
+        </p>
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <button className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-gold-soft to-gold-deep px-6 py-3.5 text-sm font-medium text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:-translate-y-0.5">
+            Mulai gratis
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </button>
+          <button className="rounded-xl border border-border bg-card/60 px-6 py-3.5 text-sm text-foreground backdrop-blur transition-colors hover:bg-card">
+            Bicara dengan tim
+          </button>
         </div>
       </div>
     </section>
   );
 }
 
+/* ----------------------------- FOOTER ----------------------------- */
 function Footer() {
   return (
-    <footer className="border-t border-border">
+    <footer className="border-t border-border bg-background">
       <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 py-10 sm:flex-row sm:items-center">
         <div className="flex items-center gap-2.5">
-          <div className="grid h-8 w-8 place-items-center rounded-md bg-ink text-cream">
-            <span className="font-serif text-base italic">N</span>
+          <div className="grid h-8 w-8 place-items-center rounded-md border border-gold/30 bg-gold/5">
+            <span className="font-serif text-base italic text-gold">N</span>
           </div>
           <div className="font-serif text-lg">NodeKPT</div>
           <span className="text-xs text-muted-foreground">© 2026</span>
         </div>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-          <a href="#" className="hover:text-foreground">Marketplace</a>
-          <a href="#" className="hover:text-foreground">Harga</a>
-          <a href="#" className="hover:text-foreground">Jadi Seller</a>
-          <a href="#" className="hover:text-foreground">Kontak</a>
+          <a href="#" className="hover:text-gold">Marketplace</a>
+          <a href="#" className="hover:text-gold">Harga</a>
+          <a href="#" className="hover:text-gold">Jadi Seller</a>
+          <a href="#" className="hover:text-gold">Kontak</a>
         </div>
       </div>
     </footer>
