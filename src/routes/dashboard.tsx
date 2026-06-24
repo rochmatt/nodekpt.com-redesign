@@ -228,15 +228,17 @@ function Topbar() {
 function IconButton({
   icon: Icon,
   badge,
+  iconColor = "text-foreground/70",
 }: {
   icon: React.ComponentType<{ className?: string }>;
   badge?: string;
+  iconColor?: string;
 }) {
   return (
-    <button className="relative grid h-10 w-10 place-items-center rounded-xl border border-border bg-card/60 text-muted-foreground transition-colors hover:border-gold/30 hover:text-gold">
-      <Icon className="h-4 w-4" />
+    <button className="relative grid h-10 w-10 place-items-center rounded-xl border border-border bg-card/60 transition-colors hover:border-gold/30">
+      <Icon className={`h-4 w-4 ${iconColor}`} />
       {badge && (
-        <span className="absolute -right-1 -top-1 grid h-4 min-w-4 place-items-center rounded-full bg-gradient-to-b from-gold-soft to-gold-deep px-1 text-[9px] font-medium text-primary-foreground">
+        <span className="absolute -right-1 -top-1 grid h-4 min-w-4 place-items-center rounded-full bg-gradient-to-b from-gold-soft to-gold-deep px-1 text-[9px] font-semibold text-primary-foreground">
           {badge}
         </span>
       )}
