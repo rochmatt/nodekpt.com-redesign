@@ -284,9 +284,10 @@ function Stats() {
       {stats.map((s) => (
         <div
           key={s.label}
-          className="group relative overflow-hidden rounded-2xl border border-border bg-card/60 p-6 transition-all hover:-translate-y-0.5 hover:border-gold/30"
+          className="card-interactive group relative overflow-hidden p-6"
         >
           <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-gold/5 blur-2xl transition-opacity group-hover:bg-gold/10" />
+
           <div className="relative flex items-start justify-between">
             <div className={`grid h-11 w-11 place-items-center rounded-xl border ${s.ringColor}`}>
               <s.icon className={`h-5 w-5 ${s.iconColor}`} />
