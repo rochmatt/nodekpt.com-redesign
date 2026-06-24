@@ -44,7 +44,7 @@ export const Route = createFileRoute("/dashboard")({
 
 function Dashboard() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="theme-light min-h-screen bg-background text-foreground">
       <div className="constellation pointer-events-none fixed inset-0 opacity-40" aria-hidden />
       <div className="radial-glow pointer-events-none fixed left-1/3 top-0 h-[600px] w-[900px] -translate-x-1/2" aria-hidden />
 
