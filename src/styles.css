@@ -84,10 +84,10 @@
 
 /* Light luxe scope — pure white surfaces with the same gold accent */
 .theme-light {
-  --background: oklch(1 0 0);
+  --background: oklch(0.965 0.003 250);
   --foreground: oklch(0.18 0.01 70);
 
-  --card: oklch(0.995 0.003 80);
+  --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.01 70);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0.01 70);
@@ -103,13 +103,14 @@
   --secondary-foreground: oklch(0.18 0.01 70);
   --muted: oklch(0.97 0.005 80);
   --muted-foreground: oklch(0.48 0.01 70);
-  --accent: oklch(0.95 0.012 80);
+  --accent: oklch(0.93 0.005 250);
   --accent-foreground: oklch(0.18 0.01 70);
+
 
   --destructive: oklch(0.55 0.2 27);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.9 0.008 70 / 0.9);
-  --input: oklch(0.9 0.008 70 / 0.9);
+  --border: oklch(0.89 0.005 250 / 0.9);
+  --input: oklch(0.89 0.005 250 / 0.9);
   --ring: oklch(0.62 0.13 65);
 
   --gradient-gold: linear-gradient(
