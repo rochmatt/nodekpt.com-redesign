@@ -344,3 +344,37 @@
   &:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   &:disabled { opacity: 0.5; cursor: not-allowed; }
 }
+
+/* ============================================================
+   Card system — unified radius, border, shadow.
+   ============================================================ */
+@utility card-surface {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+@utility card-interactive {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-2px);
+    border-color: rgba(13, 148, 136, 0.18);
+  }
+}
+
+@utility card-feature {
+  background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+  border: 1px solid rgba(13, 148, 136, 0.12);
+  border-radius: var(--card-radius);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04),
+    0 12px 32px -16px rgba(13, 148, 136, 0.2);
+}
+
