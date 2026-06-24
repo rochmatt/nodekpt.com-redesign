@@ -119,6 +119,8 @@
   --secondary-foreground: var(--text);
   --muted: var(--card-muted);
   --muted-foreground: var(--text-muted);
+  --badge-notification: #dc2626;
+  
   
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
