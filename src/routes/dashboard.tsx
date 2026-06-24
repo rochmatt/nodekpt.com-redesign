@@ -71,47 +71,48 @@ function Dashboard() {
 /* ---------- SIDEBAR ---------- */
 function Sidebar() {
   const main = [
-    { icon: LayoutDashboard, label: "Dashboard", active: true },
-    { icon: Store, label: "Marketplace" },
-    { icon: Globe, label: "Proxy" },
-    { icon: HardDrive, label: "Bare Metal" },
+    { icon: LayoutDashboard, label: "Dashboard", active: true, iconColor: "text-teal-600" },
+    { icon: Store, label: "Marketplace", iconColor: "text-blue-600" },
+    { icon: Globe, label: "Proxy", iconColor: "text-indigo-600" },
+    { icon: HardDrive, label: "Bare Metal", iconColor: "text-violet-600" },
   ];
   const services = [
-    { icon: Server, label: "My VPS" },
-    { icon: Download, label: "Winstaller" },
-    { icon: HardDrive, label: "My Bare Metal" },
-    { icon: Package, label: "Orders" },
-    { icon: Wallet, label: "Wallet & Balance" },
-    { icon: Heart, label: "Wishlist" },
-    { icon: Clock, label: "Recently Viewed" },
-    { icon: MessageSquare, label: "Messages" },
-    { icon: RefreshCw, label: "Subscriptions" },
-    { icon: Gift, label: "Referrals" },
-    { icon: Scale, label: "Disputes" },
+    { icon: Server, label: "My VPS", iconColor: "text-sky-600" },
+    { icon: Download, label: "Winstaller", iconColor: "text-cyan-600" },
+    { icon: HardDrive, label: "My Bare Metal", iconColor: "text-purple-600" },
+    { icon: Package, label: "Orders", iconColor: "text-amber-600" },
+    { icon: Wallet, label: "Wallet & Balance", iconColor: "text-emerald-600" },
+    { icon: Heart, label: "Wishlist", iconColor: "text-rose-500" },
+    { icon: Clock, label: "Recently Viewed", iconColor: "text-slate-600" },
+    { icon: MessageSquare, label: "Messages", iconColor: "text-blue-500" },
+    { icon: RefreshCw, label: "Subscriptions", iconColor: "text-orange-600" },
+    { icon: Gift, label: "Referrals", iconColor: "text-pink-600" },
+    { icon: Scale, label: "Disputes", iconColor: "text-red-600" },
   ];
   const account = [
-    { icon: BookOpen, label: "Guide" },
-    { icon: LifeBuoy, label: "Support" },
-    { icon: Mail, label: "Contact" },
-    { icon: User, label: "Profile" },
+    { icon: BookOpen, label: "Guide", iconColor: "text-lime-600" },
+    { icon: LifeBuoy, label: "Support", iconColor: "text-teal-500" },
+    { icon: Mail, label: "Contact", iconColor: "text-sky-500" },
+    { icon: User, label: "Profile", iconColor: "text-fuchsia-600" },
   ];
 
   return (
     <aside className="sticky top-0 hidden h-screen w-72 shrink-0 border-r border-border/60 bg-card/40 backdrop-blur-xl lg:flex lg:flex-col">
       <Link to="/" className="flex items-center gap-2.5 border-b border-border/60 px-6 py-5">
         <div className="grid h-10 w-10 place-items-center rounded-lg border border-gold/30 bg-gradient-to-br from-gold-soft/20 to-transparent">
+
           <span className="text-lg font-bold leading-none text-gold">N</span>
         </div>
         <div className="leading-tight">
           <div className="text-lg font-bold tracking-tight">NodeKPT</div>
-          <div className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">Buy & Sell VPS</div>
+          <div className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground/50">Buy & Sell VPS</div>
         </div>
       </Link>
-
       <div className="flex-1 overflow-y-auto px-3 py-5">
         {/* Become a Seller CTA */}
         <button className="group mb-6 flex w-full items-center gap-3 rounded-xl bg-gradient-to-b from-gold-soft to-gold-deep px-4 py-3 text-left text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:-translate-y-0.5">
           <div className="grid h-8 w-8 place-items-center rounded-lg bg-black/15">
+
             <Store className="h-4 w-4" />
           </div>
           <div className="flex-1">
@@ -120,14 +121,13 @@ function Sidebar() {
           </div>
           <ArrowRight className="h-4 w-4 opacity-80 transition-transform group-hover:translate-x-0.5" />
         </button>
-
         <NavGroup title="Main" items={main} />
         <NavGroup title="Services" items={services} />
         <NavGroup title="Account" items={account} />
       </div>
+      <button className="mx-3 mb-4 flex items-center gap-3 rounded-xl border border-border/60 px-4 py-3 text-sm font-semibold text-foreground/80 transition-colors hover:border-gold/30 hover:text-foreground">
 
-      <button className="mx-3 mb-4 flex items-center gap-3 rounded-xl border border-border/60 px-4 py-3 text-sm text-muted-foreground transition-colors hover:border-gold/30 hover:text-gold">
-        <LogOut className="h-4 w-4" />
+        <LogOut className="h-4 w-4 text-foreground/50" />
         Logout
       </button>
     </aside>
@@ -139,29 +139,36 @@ function NavGroup({
   items,
 }: {
   title: string;
-  items: { icon: React.ComponentType<{ className?: string }>; label: string; active?: boolean }[];
+  items: {
+    icon: React.ComponentType<{ className?: string }>;
+    label: string;
+    active?: boolean;
+    iconColor: string;
+  }[];
 }) {
   return (
     <div className="mb-6">
-      <div className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/70">
+
+      <div className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground/50">
         {title}
       </div>
       <ul className="space-y-1">
-        {items.map(({ icon: Icon, label, active }) => (
+        {items.map(({ icon: Icon, label, active, iconColor }) => (
           <li key={label}>
             <a
               href="#"
               className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-all ${
                 active
                   ? "border border-gold/20 bg-gold/10 text-foreground"
-                  : "text-muted-foreground hover:bg-gold/[0.03] hover:text-foreground"
+                  : "text-foreground/80 hover:bg-gold/[0.03] hover:text-foreground"
               }`}
             >
               <Icon
                 className={`h-5 w-5 transition-colors ${
-                  active ? "text-gold" : "text-muted-foreground group-hover:text-gold"
+                  active ? iconColor : `${iconColor} opacity-80 group-hover:opacity-100`
                 }`}
               />
+
               <span>{label}</span>
               {active && (
                 <span className="ml-auto h-2 w-2 rounded-full bg-gold shadow-[0_0_8px_var(--gold)]" />
@@ -175,6 +182,7 @@ function NavGroup({
 }
 
 /* ---------- TOPBAR ---------- */
+
 function Topbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl">
