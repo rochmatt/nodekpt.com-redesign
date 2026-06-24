@@ -82,45 +82,44 @@
   --shadow-lift: 0 20px 60px -20px oklch(0 0 0 / 0.7);
 }
 
-/* Light luxe scope — pure white surfaces with the same gold accent */
+/* Light dashboard scope — clean Facebook-grey background with NodeKPT teal accent */
 .theme-light {
-  --background: oklch(0.965 0.003 250);
-  --foreground: oklch(0.18 0.01 70);
+  --background: #F0F2F5;
+  --foreground: #0f172a;
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.01 70);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.01 70);
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
 
-  --primary: oklch(0.62 0.13 65);
-  --primary-foreground: oklch(0.99 0.005 80);
+  --primary: #0d9488;
+  --primary-foreground: #ffffff;
 
-  --gold: oklch(0.62 0.13 65);
-  --gold-soft: oklch(0.78 0.14 75);
-  --gold-deep: oklch(0.5 0.12 55);
+  --gold: #0d9488;
+  --gold-soft: #14b8a6;
+  --gold-deep: #0f766e;
 
-  --secondary: oklch(0.97 0.005 80);
-  --secondary-foreground: oklch(0.18 0.01 70);
-  --muted: oklch(0.97 0.005 80);
-  --muted-foreground: oklch(0.48 0.01 70);
-  --accent: oklch(0.93 0.005 250);
-  --accent-foreground: oklch(0.18 0.01 70);
+  --secondary: #f8fafc;
+  --secondary-foreground: #0f172a;
+  --muted: #f8fafc;
+  --muted-foreground: #94a3b8;
+  --accent: #f0fdfa;
+  --accent-foreground: #0f172a;
 
-
-  --destructive: oklch(0.55 0.2 27);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.89 0.005 250 / 0.9);
-  --input: oklch(0.89 0.005 250 / 0.9);
-  --ring: oklch(0.62 0.13 65);
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #0d9488;
 
   --gradient-gold: linear-gradient(
     135deg,
-    oklch(0.7 0.14 75) 0%,
-    oklch(0.6 0.14 65) 50%,
-    oklch(0.48 0.12 55) 100%
+    #14b8a6 0%,
+    #0d9488 50%,
+    #0f766e 100%
   );
-  --shadow-gold: 0 14px 40px -16px oklch(0.6 0.14 65 / 0.35);
-  --shadow-lift: 0 20px 50px -25px oklch(0.2 0.02 70 / 0.18);
+  --shadow-gold: 0 14px 40px -16px rgba(13, 148, 136, 0.35);
+  --shadow-lift: 0 20px 50px -25px rgba(15, 23, 42, 0.12);
 
   background-color: var(--background);
   color: var(--foreground);
@@ -128,18 +127,18 @@
 
 .theme-light .constellation {
   background-image:
-    radial-gradient(1px 1px at 12% 18%, oklch(0.6 0.14 65 / 0.35), transparent 50%),
-    radial-gradient(1px 1px at 28% 64%, oklch(0.6 0.14 65 / 0.25), transparent 50%),
-    radial-gradient(1.5px 1.5px at 48% 22%, oklch(0.6 0.14 65 / 0.3), transparent 50%),
-    radial-gradient(1px 1px at 62% 78%, oklch(0.6 0.14 65 / 0.22), transparent 50%),
-    radial-gradient(1px 1px at 78% 38%, oklch(0.6 0.14 65 / 0.28), transparent 50%),
-    radial-gradient(1.5px 1.5px at 88% 72%, oklch(0.6 0.14 65 / 0.32), transparent 50%);
+    radial-gradient(1px 1px at 12% 18%, rgba(13, 148, 136, 0.25), transparent 50%),
+    radial-gradient(1px 1px at 28% 64%, rgba(20, 184, 166, 0.18), transparent 50%),
+    radial-gradient(1.5px 1.5px at 48% 22%, rgba(13, 148, 136, 0.22), transparent 50%),
+    radial-gradient(1px 1px at 62% 78%, rgba(20, 184, 166, 0.14), transparent 50%),
+    radial-gradient(1px 1px at 78% 38%, rgba(13, 148, 136, 0.2), transparent 50%),
+    radial-gradient(1.5px 1.5px at 88% 72%, rgba(20, 184, 166, 0.24), transparent 50%);
 }
 
 .theme-light .radial-glow {
   background: radial-gradient(
     ellipse at center,
-    oklch(0.78 0.14 75 / 0.18) 0%,
+    rgba(13, 148, 136, 0.12) 0%,
     transparent 60%
   );
 }
