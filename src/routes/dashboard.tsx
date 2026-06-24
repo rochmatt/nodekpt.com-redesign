@@ -200,24 +200,24 @@ function Topbar() {
         </div>
 
         <div className="ml-auto flex items-center gap-2">
-          <IconButton icon={ShoppingCart} badge="3" />
-          <IconButton icon={MessageSquare} />
-          <button className="flex h-10 items-center gap-1.5 rounded-xl border border-border bg-card/60 px-3 text-sm text-muted-foreground transition-colors hover:text-foreground">
-            <Globe className="h-4 w-4" />
+          <IconButton icon={ShoppingCart} badge="3" iconColor="text-amber-600" />
+          <IconButton icon={MessageSquare} iconColor="text-blue-600" />
+          <button className="flex h-10 items-center gap-1.5 rounded-xl border border-border bg-card/60 px-3 text-sm font-semibold text-foreground/80 transition-colors hover:text-foreground">
+            <Globe className="h-4 w-4 text-indigo-600" />
             EN
             <ChevronDown className="h-3.5 w-3.5" />
           </button>
-          <IconButton icon={Bell} badge="99+" />
+          <IconButton icon={Bell} badge="99+" iconColor="text-rose-600" />
 
           <div className="ml-2 flex items-center gap-3 rounded-xl border border-border bg-card/60 py-1.5 pl-1.5 pr-3">
             <div className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-gold-soft to-gold-deep font-serif text-base text-primary-foreground">
               D
             </div>
             <div className="hidden text-right leading-tight sm:block">
-              <div className="text-sm">Demo Buyer</div>
-              <div className="text-[10px] text-muted-foreground">buyer@nodekpt.com</div>
+              <div className="text-sm font-semibold text-foreground">Demo Buyer</div>
+              <div className="text-[10px] text-foreground/60">buyer@nodekpt.com</div>
             </div>
-            <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
+            <ChevronDown className="h-3.5 w-3.5 text-foreground/60" />
           </div>
         </div>
       </div>
