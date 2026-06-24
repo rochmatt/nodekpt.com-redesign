@@ -100,11 +100,11 @@ function Sidebar() {
     <aside className="sticky top-0 hidden h-screen w-72 shrink-0 border-r border-border/60 bg-card/40 backdrop-blur-xl lg:flex lg:flex-col">
       <Link to="/" className="flex items-center gap-2.5 border-b border-border/60 px-6 py-5">
         <div className="grid h-10 w-10 place-items-center rounded-lg border border-gold/30 bg-gradient-to-br from-gold-soft/20 to-transparent">
-          <span className="font-serif text-xl italic leading-none text-gold">N</span>
+          <span className="text-lg font-bold leading-none text-gold">N</span>
         </div>
         <div className="leading-tight">
-          <div className="font-serif text-xl tracking-tight">NodeKPT</div>
-          <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">Buy & Sell VPS</div>
+          <div className="text-lg font-bold tracking-tight">NodeKPT</div>
+          <div className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">Buy & Sell VPS</div>
         </div>
       </Link>
 
@@ -143,7 +143,7 @@ function NavGroup({
 }) {
   return (
     <div className="mb-6">
-      <div className="px-3 pb-2 text-[10px] uppercase tracking-[0.28em] text-muted-foreground/70">
+      <div className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/70">
         {title}
       </div>
       <ul className="space-y-0.5">
@@ -237,19 +237,18 @@ function Header() {
   return (
     <div className="flex flex-wrap items-end justify-between gap-6">
       <div>
-        <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-gold-deep">
+        <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold-deep">
           <Sparkles className="h-3 w-3" /> Buy & Sell VPS Servers
         </div>
-        <h1 className="mt-4 font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-          Welcome back,
-          <br />
-          <span className="italic text-gold-gradient">Demo Buyer</span>.
+        <h1 className="mt-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl">
+          Welcome back,{" "}
+          <span className="text-gold-gradient">Demo Buyer</span>.
         </h1>
-        <p className="mt-3 max-w-lg text-sm text-muted-foreground">
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
           The first marketplace where anyone can sell VPSes and buyers get direct server control via an integrated panel — no long contracts, pay in IDR (QRIS, VA), full root access.
         </p>
       </div>
-      <button className="group inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm transition-colors hover:border-gold/30 hover:text-gold-deep">
+      <button className="group inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-medium transition-colors hover:border-gold/30 hover:text-gold-deep">
         <Store className="h-4 w-4 text-gold-deep" />
         Browse VPS
         <ArrowUpRight className="h-3.5 w-3.5" />
@@ -284,13 +283,13 @@ function Stats() {
               </span>
             )}
           </div>
-          <div className="relative mt-6 font-serif text-5xl leading-none tracking-tight">
+          <div className="relative mt-6 text-4xl font-bold leading-none tracking-tight">
             {s.value}
           </div>
           <div className="relative mt-4 flex items-center justify-between">
-            <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">{s.label}</div>
+            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">{s.label}</div>
           </div>
-          <div className="relative mt-1 text-[11px] text-muted-foreground/80">{s.hint}</div>
+          <div className="relative mt-1 text-[11px] leading-relaxed text-muted-foreground/80">{s.hint}</div>
         </div>
       ))}
     </div>
@@ -306,14 +305,14 @@ function WalletCard() {
 
       <div className="relative flex flex-wrap items-start justify-between gap-6">
         <div>
-          <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-gold">
+          <div className="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-deep">
             <Wallet className="h-3.5 w-3.5" /> Wallet Balance
           </div>
-          <div className="mt-3 flex items-baseline gap-2">
-            <span className="font-serif text-2xl text-muted-foreground">Rp</span>
-            <span className="font-serif text-6xl tracking-tight text-gold-gradient">618.147</span>
+          <div className="mt-3 flex items-baseline gap-1.5">
+            <span className="text-xl font-semibold text-muted-foreground">Rp</span>
+            <span className="text-5xl font-bold tracking-tight leading-none text-gold-gradient">618.147</span>
           </div>
-          <p className="mt-2 text-xs text-muted-foreground">Usable for your next deploy — VPS, Bare Metal, or Proxy</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Usable for your next deploy — VPS, Bare Metal, or Proxy</p>
           <div className="mt-5 flex flex-wrap gap-2">
             <button className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-b from-gold-soft to-gold-deep px-4 py-2 text-sm text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:-translate-y-0.5">
               Top Up <ArrowRight className="h-3.5 w-3.5" />
@@ -325,7 +324,7 @@ function WalletCard() {
         </div>
 
         <div className="min-w-[240px] flex-1 rounded-xl border border-border bg-background/40 p-4 backdrop-blur">
-          <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
             Recent Refunds
           </div>
           <ul className="mt-3 space-y-2.5 text-sm">
@@ -364,8 +363,8 @@ function ReferralCard() {
       <div className="absolute -bottom-12 -right-12 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
       <div className="relative">
         <HeartHandshake className="h-6 w-6 text-gold" />
-        <h3 className="mt-4 font-serif text-2xl leading-tight">
-          Invite friends, <span className="italic text-gold-gradient">earn balance</span>.
+        <h3 className="mt-4 text-xl font-bold leading-snug tracking-tight">
+          Invite friends, <span className="text-gold-gradient">earn balance</span>.
         </h3>
         <p className="mt-2 text-sm text-muted-foreground">
           Rp 25.000 for every friend who joins and makes their first top up.
@@ -387,8 +386,8 @@ function MyVPS() {
     <section className="mt-8 rounded-2xl border border-border bg-card/40 p-7">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-serif text-2xl tracking-tight">My VPS</h2>
-          <p className="text-xs text-muted-foreground">Active servers you control directly via the integrated panel</p>
+          <h2 className="text-xl font-bold tracking-tight">My VPS</h2>
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">Active servers you control directly via the integrated panel</p>
         </div>
         <a href="#" className="inline-flex items-center gap-1.5 text-sm text-gold-deep hover:gap-2.5 transition-all">
           View All <ArrowRight className="h-4 w-4" />
@@ -399,8 +398,8 @@ function MyVPS() {
         <div className="grid h-14 w-14 place-items-center rounded-xl border border-gold/30 bg-gold/5">
           <Server className="h-6 w-6 text-gold-deep" />
         </div>
-        <h3 className="mt-5 font-serif text-2xl">No active VPS yet</h3>
-        <p className="mt-2 max-w-sm text-sm text-muted-foreground">
+        <h3 className="mt-5 text-lg font-bold tracking-tight">No active VPS yet</h3>
+        <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
           Choose a VPS from trusted sellers — Jakarta, Singapore, Tokyo, Frankfurt, New York, or London.
         </p>
         <button className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-gold-soft to-gold-deep px-5 py-2.5 text-sm text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:-translate-y-0.5">
@@ -425,8 +424,8 @@ function RecentOrders() {
     <section className="mt-8 overflow-hidden rounded-2xl border border-border bg-card/40">
       <div className="flex items-center justify-between border-b border-border/60 p-7">
         <div>
-          <h2 className="font-serif text-2xl tracking-tight">Recent Orders</h2>
-          <p className="text-xs text-muted-foreground">Latest deploys across VPS, Bare Metal, and Proxy</p>
+          <h2 className="text-xl font-bold tracking-tight">Recent Orders</h2>
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">Latest deploys across VPS, Bare Metal, and Proxy</p>
         </div>
         <a href="#" className="inline-flex items-center gap-1.5 text-sm text-gold hover:gap-2.5 transition-all">
           View All <ArrowRight className="h-4 w-4" />
@@ -436,12 +435,12 @@ function RecentOrders() {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-border/60 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-              <th className="px-7 py-4 text-left font-normal">Package</th>
-              <th className="px-7 py-4 text-left font-normal">Seller</th>
-              <th className="px-7 py-4 text-left font-normal">Price</th>
-              <th className="px-7 py-4 text-left font-normal">Status</th>
-              <th className="px-7 py-4 text-left font-normal">Date</th>
+            <tr className="border-b border-border/60 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <th className="px-7 py-4 text-left">Package</th>
+              <th className="px-7 py-4 text-left">Seller</th>
+              <th className="px-7 py-4 text-left">Price</th>
+              <th className="px-7 py-4 text-left">Status</th>
+              <th className="px-7 py-4 text-left">Date</th>
             </tr>
           </thead>
           <tbody>
