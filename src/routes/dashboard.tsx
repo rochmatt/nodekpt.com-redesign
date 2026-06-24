@@ -399,6 +399,32 @@ function ReferralCard() {
   );
 }
 
+/* ---------- EMPTY STATE ---------- */
+function EmptyState({
+  icon: Icon,
+  title,
+  description,
+  cta,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  cta?: React.ReactNode;
+}) {
+  return (
+    <div className="mt-6 grid place-items-center rounded-xl border border-dashed border-border/80 bg-background/60 px-4 py-10 text-center sm:mt-8 sm:py-16">
+      <div className="grid h-14 w-14 place-items-center rounded-xl border border-[color:var(--accent)]/30 bg-[color:var(--accent-tint)]">
+        <Icon className="h-6 w-6 text-[color:var(--accent)]" />
+      </div>
+      <h3 className="mt-5 text-lg font-bold tracking-tight">{title}</h3>
+      <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
+        {description}
+      </p>
+      {cta && <div className="mt-6">{cta}</div>}
+    </div>
+  );
+}
+
 /* ---------- MY VPS ---------- */
 function MyVPS() {
   return (
@@ -413,31 +439,31 @@ function MyVPS() {
         </a>
       </div>
 
-      <div className="mt-6 grid place-items-center rounded-xl border border-dashed border-border/80 bg-background/60 px-4 py-10 text-center sm:mt-8 sm:py-16">
-        <div className="grid h-14 w-14 place-items-center rounded-xl border border-gold/30 bg-gold/5">
-          <Server className="h-6 w-6 text-gold-deep" />
-        </div>
-        <h3 className="mt-5 text-lg font-bold tracking-tight">No active VPS yet</h3>
-        <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-          Choose a VPS from trusted sellers — Jakarta, Singapore, Tokyo, Frankfurt, New York, or London.
-        </p>
-        <button className="btn-primary mt-6">
-          Browse Marketplace <ArrowRight className="h-4 w-4" />
-        </button>
-      </div>
+      <EmptyState
+        icon={Server}
+        title="No active VPS yet"
+        description="Choose a VPS from trusted sellers — Jakarta, Singapore, Tokyo, Frankfurt, New York, or London."
+        cta={
+          <button className="btn-primary">
+            Browse Marketplace <ArrowRight className="h-4 w-4" />
+          </button>
+        }
+      />
     </section>
   );
 }
 
 /* ---------- RECENT ORDERS ---------- */
 function RecentOrders() {
-  const orders = [
-    { pkg: "VPS Ryzen 9 5950X Super Fast", seller: "Kepeed Store", price: "Rp 50rb", status: "ACTIVE", date: "23/6/2026" },
-    { pkg: "Residential 100 ip", seller: "Proxy9proxy", price: "Rp 75rb", status: "ACTIVE", date: "23/6/2026" },
-    { pkg: "AMD Ryzen 5 3600 — Bare Metal", seller: "Admin NodeKPT", price: "Rp 1,1jt", status: "PENDING", date: "23/6/2026" },
-    { pkg: "Intel Core i7-6700 — Bare Metal", seller: "Admin NodeKPT", price: "Rp 1,2jt", status: "CANCELLED", date: "22/6/2026" },
-    { pkg: "Residential 20 ip", seller: "Proxy9proxy", price: "Rp 17rb", status: "ACTIVE", date: "22/6/2026" },
-  ];
+  const orders: {
+    pkg: string;
+    seller: string;
+    price: string;
+    status: string;
+    date: string;
+  }[] = [];
+
+  const hasOrders = orders.length > 0;
 
   return (
     <section className="card-surface mt-6 overflow-hidden sm:mt-8">
@@ -451,83 +477,98 @@ function RecentOrders() {
         </a>
       </div>
 
-      {/* Mobile: card list */}
-      <ul className="divide-y divide-border/40 md:hidden">
-        {orders.map((o, i) => {
-          const isBare = o.pkg.includes("Bare");
-          const isProxy = o.pkg.toLowerCase().includes("residential") || o.pkg.toLowerCase().includes("proxy");
-          const Icon = isBare ? HardDrive : isProxy ? Globe : Server;
-          const color = isBare ? "text-violet-600 border-violet-500/30 bg-violet-500/10" : isProxy ? "text-indigo-600 border-indigo-500/30 bg-indigo-500/10" : "text-sky-600 border-sky-500/30 bg-sky-500/10";
-          return (
-            <li key={i} className="flex items-start gap-3 p-4 sm:p-5">
-              <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg border ${color}`}>
-                <Icon className="h-4 w-4" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-start justify-between gap-2">
-                  <span className="truncate text-sm font-semibold text-foreground">{o.pkg}</span>
-                  <span className="shrink-0 font-mono text-xs text-foreground">{o.price}</span>
-                </div>
-                <div className="mt-0.5 truncate text-xs text-muted-foreground">{o.seller}</div>
-                <div className="mt-2 flex items-center justify-between gap-2">
-                  <StatusPill status={o.status} />
-                  <span className="text-[11px] text-muted-foreground">{o.date}</span>
-                </div>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-
-      {/* Desktop: table */}
-      <div className="hidden overflow-x-auto md:block">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-border/60 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              <th className="px-5 py-4 text-left lg:px-7">Package</th>
-              <th className="px-5 py-4 text-left lg:px-7">Seller</th>
-              <th className="px-5 py-4 text-left lg:px-7">Price</th>
-              <th className="px-5 py-4 text-left lg:px-7">Status</th>
-              <th className="px-5 py-4 text-left lg:px-7">Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((o, i) => (
-              <tr key={i} className="border-b border-border/40 transition-colors last:border-0 hover:bg-gold/[0.03]">
-                <td className="px-5 py-5 lg:px-7">
-                  <div className="flex items-center gap-3">
-                    {(() => {
-                      const isBare = o.pkg.includes("Bare");
-                      const isProxy = o.pkg.toLowerCase().includes("residential") || o.pkg.toLowerCase().includes("proxy");
-                      const Icon = isBare ? HardDrive : isProxy ? Globe : Server;
-                      const color = isBare ? "text-violet-600 border-violet-500/30 bg-violet-500/10" : isProxy ? "text-indigo-600 border-indigo-500/30 bg-indigo-500/10" : "text-sky-600 border-sky-500/30 bg-sky-500/10";
-                      return (
-                        <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg border ${color}`}>
-                          <Icon className="h-4 w-4" />
-                        </div>
-                      );
-                    })()}
-                    <span className="font-semibold text-foreground">{o.pkg}</span>
+      {hasOrders ? (
+        <>
+          {/* Mobile: card list */}
+          <ul className="divide-y divide-border/40 md:hidden">
+            {orders.map((o, i) => {
+              const isBare = o.pkg.includes("Bare");
+              const isProxy = o.pkg.toLowerCase().includes("residential") || o.pkg.toLowerCase().includes("proxy");
+              const Icon = isBare ? HardDrive : isProxy ? Globe : Server;
+              const color = isBare ? "text-violet-600 border-violet-500/30 bg-violet-500/10" : isProxy ? "text-indigo-600 border-indigo-500/30 bg-indigo-500/10" : "text-sky-600 border-sky-500/30 bg-sky-500/10";
+              return (
+                <li key={i} className="flex items-start gap-3 p-4 sm:p-5">
+                  <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg border ${color}`}>
+                    <Icon className="h-4 w-4" />
                   </div>
-                </td>
-                <td className="px-5 py-5 text-muted-foreground lg:px-7">{o.seller}</td>
-                <td className="px-5 py-5 font-mono lg:px-7">{o.price}</td>
-                <td className="px-5 py-5 lg:px-7">
-                  <StatusPill status={o.status} />
-                </td>
-                <td className="px-5 py-5 text-muted-foreground lg:px-7">{o.date}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="truncate text-sm font-semibold text-foreground">{o.pkg}</span>
+                      <span className="shrink-0 font-mono text-xs text-foreground">{o.price}</span>
+                    </div>
+                    <div className="mt-0.5 truncate text-xs text-muted-foreground">{o.seller}</div>
+                    <div className="mt-2 flex items-center justify-between gap-2">
+                      <StatusPill status={o.status} />
+                      <span className="text-[11px] text-muted-foreground">{o.date}</span>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
 
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border/60 px-5 py-4 text-xs text-muted-foreground sm:px-7">
-        <span>Showing 5 of 60 orders</span>
-        <button className="inline-flex items-center gap-1.5 text-gold-deep hover:gap-2.5 transition-all">
-          <HelpCircle className="h-3.5 w-3.5" /> Need help?
-        </button>
-      </div>
+          {/* Desktop: table */}
+          <div className="hidden overflow-x-auto md:block">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border/60 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  <th className="px-5 py-4 text-left lg:px-7">Package</th>
+                  <th className="px-5 py-4 text-left lg:px-7">Seller</th>
+                  <th className="px-5 py-4 text-left lg:px-7">Price</th>
+                  <th className="px-5 py-4 text-left lg:px-7">Status</th>
+                  <th className="px-5 py-4 text-left lg:px-7">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((o, i) => (
+                  <tr key={i} className="border-b border-border/40 transition-colors last:border-0 hover:bg-gold/[0.03]">
+                    <td className="px-5 py-5 lg:px-7">
+                      <div className="flex items-center gap-3">
+                        {(() => {
+                          const isBare = o.pkg.includes("Bare");
+                          const isProxy = o.pkg.toLowerCase().includes("residential") || o.pkg.toLowerCase().includes("proxy");
+                          const Icon = isBare ? HardDrive : isProxy ? Globe : Server;
+                          const color = isBare ? "text-violet-600 border-violet-500/30 bg-violet-500/10" : isProxy ? "text-indigo-600 border-indigo-500/30 bg-indigo-500/10" : "text-sky-600 border-sky-500/30 bg-sky-500/10";
+                          return (
+                            <div className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg border ${color}`}>
+                              <Icon className="h-4 w-4" />
+                            </div>
+                          );
+                        })()}
+                        <span className="font-semibold text-foreground">{o.pkg}</span>
+                      </div>
+                    </td>
+                    <td className="px-5 py-5 text-muted-foreground lg:px-7">{o.seller}</td>
+                    <td className="px-5 py-5 font-mono lg:px-7">{o.price}</td>
+                    <td className="px-5 py-5 lg:px-7">
+                      <StatusPill status={o.status} />
+                    </td>
+                    <td className="px-5 py-5 text-muted-foreground lg:px-7">{o.date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border/60 px-5 py-4 text-xs text-muted-foreground sm:px-7">
+            <span>Showing {orders.length} of 60 orders</span>
+            <button className="inline-flex items-center gap-1.5 text-gold-deep hover:gap-2.5 transition-all">
+              <HelpCircle className="h-3.5 w-3.5" /> Need help?
+            </button>
+          </div>
+        </>
+      ) : (
+        <EmptyState
+          icon={Package}
+          title="No orders yet"
+          description="When you buy a VPS, Bare Metal, or Proxy from the marketplace, your orders will appear here."
+          cta={
+            <button className="btn-primary">
+              <Store className="h-4 w-4" /> Browse Marketplace
+            </button>
+          }
+        />
+      )}
     </section>
   );
 }
