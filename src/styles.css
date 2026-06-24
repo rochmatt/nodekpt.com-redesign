@@ -82,47 +82,56 @@
   --shadow-lift: 0 20px 60px -20px oklch(0 0 0 / 0.7);
 }
 
-/* Light dashboard scope — clean Facebook-grey background with NodeKPT teal accent */
+/* Light dashboard scope — single source of truth for theme tokens.
+   Change values here once, everything (bg, cards, accents, buttons) updates. */
 .theme-light {
-  --background: #F0F2F5;
-  --foreground: #0f172a;
+  /* === Brand & accent === */
+  --accent: #0d9488;
+  --accent-soft: #14b8a6;
+  --accent-strong: #0f766e;
+  --accent-foreground: #ffffff;
+  --accent-tint: rgba(13, 148, 136, 0.10);
+  --accent-ring: rgba(13, 148, 136, 0.35);
 
+  /* === Surfaces === */
+  --bg: #F0F2F5;
   --card: #ffffff;
-  --card-foreground: #0f172a;
-  --popover: #ffffff;
-  --popover-foreground: #0f172a;
+  --card-muted: #f8fafc;
+  --border-subtle: #e2e8f0;
 
-  --primary: #0d9488;
-  --primary-foreground: #ffffff;
+  /* === Text === */
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-faint: #64748b;
 
-  --gold: #0d9488;
-  --gold-soft: #14b8a6;
-  --gold-deep: #0f766e;
-
-  --secondary: #f8fafc;
-  --secondary-foreground: #0f172a;
-  --muted: #f8fafc;
-  --muted-foreground: #475569;
-  --accent: #f0fdfa;
-  --accent-foreground: #0f172a;
-
+  /* === shadcn token bridge — keeps existing utilities working === */
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card-foreground: var(--text);
+  --popover: var(--card);
+  --popover-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-foreground);
+  --gold: var(--accent);
+  --gold-soft: var(--accent-soft);
+  --gold-deep: var(--accent-strong);
+  --secondary: var(--card-muted);
+  --secondary-foreground: var(--text);
+  --muted: var(--card-muted);
+  --muted-foreground: var(--text-muted);
+  
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #0d9488;
+  --border: var(--border-subtle);
+  --input: var(--border-subtle);
+  --ring: var(--accent);
 
-  --gradient-gold: linear-gradient(
-    135deg,
-    #14b8a6 0%,
-    #0d9488 50%,
-    #0f766e 100%
-  );
-  --shadow-gold: 0 14px 40px -16px rgba(13, 148, 136, 0.35);
+  --gradient-gold: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent) 50%, var(--accent-strong) 100%);
+  --shadow-gold: 0 14px 40px -16px var(--accent-ring);
   --shadow-lift: 0 20px 50px -25px rgba(15, 23, 42, 0.12);
 
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 .theme-light .constellation {
@@ -195,4 +204,136 @@
     oklch(0.6 0.13 65 / 0.18) 0%,
     transparent 60%
   );
+}
+
+/* ============================================================
+   Button system — driven by --accent tokens.
+   Change --accent in .theme-light and every btn updates.
+   ============================================================ */
+@utility btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1;
+  border-radius: 0.75rem;
+  padding: 0.625rem 1.125rem;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1;
+  border-radius: 0.75rem;
+  padding: 0.625rem 1.125rem;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid var(--accent-strong);
+  background: linear-gradient(180deg, var(--accent-soft), var(--accent));
+  color: var(--accent-foreground);
+  box-shadow: 0 6px 18px -8px var(--accent-ring);
+
+  &:hover {
+    background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+    box-shadow: 0 10px 24px -8px var(--accent-ring);
+    transform: translateY(-1px);
+  }
+  &:active {
+    transform: translateY(0);
+    background: var(--accent-strong);
+    box-shadow: 0 2px 6px -2px var(--accent-ring);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  &:disabled,
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1;
+  border-radius: 0.75rem;
+  padding: 0.625rem 1.125rem;
+  transition: transform 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid var(--border-subtle);
+  background: var(--card);
+  color: var(--text);
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent-strong);
+    background: var(--accent-tint);
+  }
+  &:active {
+    background: var(--accent-tint);
+    border-color: var(--accent-strong);
+    transform: translateY(0);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  &:disabled,
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: var(--text-muted);
+    background: var(--card-muted);
+    border-color: var(--border-subtle);
+  }
+}
+
+@utility btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.875rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid transparent;
+
+  &:hover {
+    background: var(--accent-tint);
+    color: var(--accent-strong);
+  }
+  &:active { background: var(--accent-tint); }
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
 }

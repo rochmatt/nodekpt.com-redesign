@@ -262,8 +262,8 @@ function Header() {
           The first marketplace where anyone can sell VPSes and buyers get direct server control via an integrated panel — no long contracts, pay in IDR (QRIS, VA), full root access.
         </p>
       </div>
-      <button className="group inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-medium transition-colors hover:border-gold/30 hover:text-gold-deep">
-        <Store className="h-4 w-4 text-gold-deep" />
+      <button className="btn-secondary">
+        <Store className="h-4 w-4 text-[color:var(--accent-strong)]" />
         Browse VPS
         <ArrowUpRight className="h-3.5 w-3.5" />
       </button>
@@ -328,10 +328,10 @@ function WalletCard() {
           </div>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Usable for your next deploy — VPS, Bare Metal, or Proxy</p>
           <div className="mt-5 flex flex-wrap gap-2">
-            <button className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-b from-gold-soft to-gold-deep px-4 py-2 text-sm text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:-translate-y-0.5">
+            <button className="btn-primary">
               Top Up <ArrowRight className="h-3.5 w-3.5" />
             </button>
-            <button className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background/40 px-4 py-2 text-sm text-foreground transition-colors hover:border-gold/30 hover:text-gold">
+            <button className="btn-secondary">
               <Receipt className="h-3.5 w-3.5" /> History
             </button>
           </div>
@@ -385,7 +385,7 @@ function ReferralCard() {
         </p>
         <div className="mt-5 flex items-center gap-2 rounded-lg border border-border bg-background/40 p-1 pl-3">
           <span className="font-mono text-sm text-gold">nodekpt.com/r/demo</span>
-          <button className="ml-auto rounded-md bg-gradient-to-b from-gold-soft to-gold-deep px-3 py-1.5 text-xs text-primary-foreground">
+          <button className="btn-primary ml-auto !py-1.5 !px-3 !text-xs">
             Copy
           </button>
         </div>
@@ -416,7 +416,7 @@ function MyVPS() {
         <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
           Choose a VPS from trusted sellers — Jakarta, Singapore, Tokyo, Frankfurt, New York, or London.
         </p>
-        <button className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-gold-soft to-gold-deep px-5 py-2.5 text-sm text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:-translate-y-0.5">
+        <button className="btn-primary mt-6">
           Browse Marketplace <ArrowRight className="h-4 w-4" />
         </button>
       </div>
