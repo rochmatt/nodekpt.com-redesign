@@ -284,9 +284,10 @@ function Stats() {
       {stats.map((s) => (
         <div
           key={s.label}
-          className="group relative overflow-hidden rounded-2xl border border-border bg-card/60 p-6 transition-all hover:-translate-y-0.5 hover:border-gold/30"
+          className="card-interactive group relative overflow-hidden p-6"
         >
           <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-gold/5 blur-2xl transition-opacity group-hover:bg-gold/10" />
+
           <div className="relative flex items-start justify-between">
             <div className={`grid h-11 w-11 place-items-center rounded-xl border ${s.ringColor}`}>
               <s.icon className={`h-5 w-5 ${s.iconColor}`} />
@@ -313,7 +314,7 @@ function Stats() {
 /* ---------- WALLET CARD ---------- */
 function WalletCard() {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/[0.08] via-card to-card p-7 shadow-[var(--shadow-gold)] lg:col-span-2">
+    <div className="card-feature relative overflow-hidden p-7 lg:col-span-2">
       <div className="constellation absolute inset-0 opacity-50" aria-hidden />
       <div className="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-gold/15 blur-3xl" aria-hidden />
 
@@ -373,7 +374,7 @@ function WalletCard() {
 /* ---------- REFERRAL ---------- */
 function ReferralCard() {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-border bg-card/60 p-7">
+    <div className="card-surface relative overflow-hidden p-7">
       <div className="absolute -bottom-12 -right-12 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
       <div className="relative">
         <HeartHandshake className="h-6 w-6 text-gold" />
@@ -397,7 +398,7 @@ function ReferralCard() {
 /* ---------- MY VPS ---------- */
 function MyVPS() {
   return (
-    <section className="mt-8 rounded-2xl border border-border bg-card/40 p-7">
+    <section className="card-surface mt-8 p-7">
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold tracking-tight">My VPS</h2>
@@ -435,7 +436,7 @@ function RecentOrders() {
   ];
 
   return (
-    <section className="mt-8 overflow-hidden rounded-2xl border border-border bg-card/40">
+    <section className="card-surface mt-8 overflow-hidden">
       <div className="flex items-center justify-between border-b border-border/60 p-7">
         <div>
           <h2 className="text-xl font-bold tracking-tight">Recent Orders</h2>

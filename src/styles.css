@@ -130,9 +130,16 @@
   --shadow-gold: 0 14px 40px -16px var(--accent-ring);
   --shadow-lift: 0 20px 50px -25px rgba(15, 23, 42, 0.12);
 
+  /* === Card system — single source of truth === */
+  --card-radius: 1rem;
+  --card-border: 1px solid rgba(15, 23, 42, 0.06);
+  --card-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 16px -8px rgba(15, 23, 42, 0.08);
+  --card-shadow-hover: 0 2px 4px rgba(15, 23, 42, 0.05), 0 12px 28px -12px rgba(15, 23, 42, 0.14);
+
   background-color: var(--bg);
   color: var(--text);
 }
+
 
 .theme-light .constellation {
   background-image:
@@ -242,20 +249,21 @@
     border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
   cursor: pointer;
   white-space: nowrap;
-  border: 1px solid var(--accent-strong);
-  background: linear-gradient(180deg, var(--accent-soft), var(--accent));
+  border: 1px solid var(--accent);
+  background: var(--accent);
   color: var(--accent-foreground);
-  box-shadow: 0 6px 18px -8px var(--accent-ring);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08), 0 4px 12px -4px var(--accent-ring);
 
   &:hover {
-    background: linear-gradient(180deg, var(--accent), var(--accent-strong));
-    box-shadow: 0 10px 24px -8px var(--accent-ring);
+    background: var(--accent-strong);
+    border-color: var(--accent-strong);
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.1), 0 8px 18px -6px var(--accent-ring);
     transform: translateY(-1px);
   }
   &:active {
     transform: translateY(0);
     background: var(--accent-strong);
-    box-shadow: 0 2px 6px -2px var(--accent-ring);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
   }
   &:focus-visible {
     outline: 2px solid var(--accent);
@@ -269,6 +277,7 @@
     box-shadow: none;
   }
 }
+
 
 @utility btn-secondary {
   display: inline-flex;
@@ -337,3 +346,37 @@
   &:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   &:disabled { opacity: 0.5; cursor: not-allowed; }
 }
+
+/* ============================================================
+   Card system — unified radius, border, shadow.
+   ============================================================ */
+@utility card-surface {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+@utility card-interactive {
+  background: var(--card);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-2px);
+    border-color: rgba(13, 148, 136, 0.18);
+  }
+}
+
+@utility card-feature {
+  background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+  border: 1px solid rgba(13, 148, 136, 0.12);
+  border-radius: var(--card-radius);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04),
+    0 12px 32px -16px rgba(13, 148, 136, 0.2);
+}
+
