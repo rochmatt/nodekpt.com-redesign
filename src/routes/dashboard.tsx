@@ -435,12 +435,12 @@ function RecentOrders() {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-border/60 text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-              <th className="px-7 py-4 text-left font-normal">Package</th>
-              <th className="px-7 py-4 text-left font-normal">Seller</th>
-              <th className="px-7 py-4 text-left font-normal">Price</th>
-              <th className="px-7 py-4 text-left font-normal">Status</th>
-              <th className="px-7 py-4 text-left font-normal">Date</th>
+            <tr className="border-b border-border/60 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <th className="px-7 py-4 text-left">Package</th>
+              <th className="px-7 py-4 text-left">Seller</th>
+              <th className="px-7 py-4 text-left">Price</th>
+              <th className="px-7 py-4 text-left">Status</th>
+              <th className="px-7 py-4 text-left">Date</th>
             </tr>
           </thead>
           <tbody>
