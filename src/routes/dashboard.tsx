@@ -186,7 +186,7 @@ function NavGroup({
 function Topbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center gap-4 px-8 py-4">
+      <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3 sm:gap-4 sm:px-6 sm:py-4 lg:px-8">
         <div className="relative hidden flex-1 max-w-md md:block">
           <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input
@@ -199,25 +199,29 @@ function Topbar() {
           </span>
         </div>
 
-        <div className="ml-auto flex items-center gap-2">
+        <button className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-border bg-card/60 md:hidden">
+          <Search className="h-4 w-4 text-foreground/70" />
+        </button>
+
+        <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
           <IconButton icon={ShoppingCart} badge="3" iconColor="text-amber-600" />
           <IconButton icon={MessageSquare} iconColor="text-blue-600" />
-          <button className="flex h-10 items-center gap-1.5 rounded-xl border border-border bg-card/60 px-3 text-sm font-semibold text-foreground/80 transition-colors hover:text-foreground">
+          <button className="hidden h-10 items-center gap-1.5 rounded-xl border border-border bg-card/60 px-3 text-sm font-semibold text-foreground/80 transition-colors hover:text-foreground sm:flex">
             <Globe className="h-4 w-4 text-indigo-600" />
             EN
             <ChevronDown className="h-3.5 w-3.5" />
           </button>
           <IconButton icon={Bell} badge="99+" iconColor="text-rose-600" />
 
-          <div className="ml-2 flex items-center gap-3 rounded-xl border border-border bg-card/60 py-1.5 pl-1.5 pr-3">
+          <div className="ml-1 flex shrink-0 items-center gap-2 rounded-xl border border-border bg-card/60 py-1.5 pl-1.5 pr-2 sm:ml-2 sm:gap-3 sm:pr-3">
             <div className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-gold-soft to-gold-deep font-serif text-base text-primary-foreground">
               D
             </div>
-            <div className="hidden text-right leading-tight sm:block">
+            <div className="hidden text-right leading-tight md:block">
               <div className="text-sm font-semibold text-foreground">Demo Buyer</div>
               <div className="text-[10px] text-foreground/60">buyer@nodekpt.com</div>
             </div>
-            <ChevronDown className="h-3.5 w-3.5 text-foreground/60" />
+            <ChevronDown className="hidden h-3.5 w-3.5 text-foreground/60 sm:block" />
           </div>
         </div>
       </div>
