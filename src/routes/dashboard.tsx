@@ -283,13 +283,13 @@ function Stats() {
               </span>
             )}
           </div>
-          <div className="relative mt-6 font-serif text-5xl leading-none tracking-tight">
+          <div className="relative mt-6 text-4xl font-bold leading-none tracking-tight">
             {s.value}
           </div>
           <div className="relative mt-4 flex items-center justify-between">
-            <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">{s.label}</div>
+            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">{s.label}</div>
           </div>
-          <div className="relative mt-1 text-[11px] text-muted-foreground/80">{s.hint}</div>
+          <div className="relative mt-1 text-[11px] leading-relaxed text-muted-foreground/80">{s.hint}</div>
         </div>
       ))}
     </div>
