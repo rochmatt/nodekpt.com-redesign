@@ -416,7 +416,7 @@ function MyVPS() {
         <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
           Choose a VPS from trusted sellers — Jakarta, Singapore, Tokyo, Frankfurt, New York, or London.
         </p>
-        <button className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-gold-soft to-gold-deep px-5 py-2.5 text-sm text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:-translate-y-0.5">
+        <button className="btn-primary mt-6">
           Browse Marketplace <ArrowRight className="h-4 w-4" />
         </button>
       </div>
