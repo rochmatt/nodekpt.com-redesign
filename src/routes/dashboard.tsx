@@ -197,15 +197,15 @@ function Topbar() {
           <input
             type="text"
             placeholder="Search VPS, Bare Metal, or Proxy..."
-            className="h-10 w-full rounded-xl border border-border bg-card/60 pl-10 pr-4 text-sm outline-none placeholder:text-muted-foreground focus:border-gold/40"
+            className="h-10 w-full rounded-xl border border-border bg-card/60 pl-10 pr-4 text-sm outline-none placeholder:text-muted-foreground focus:border-[color:var(--accent)]/40 focus:ring-1 focus:ring-[color:var(--accent)]/10"
           />
           <span className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md border border-border bg-background/60 px-1.5 py-0.5 text-[10px] text-muted-foreground">
             ⌘K
           </span>
         </div>
 
-        <button className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-border bg-card/60 md:hidden">
-          <Search className="h-4 w-4 text-foreground/70" />
+        <button className="grid h-10 w-10 shrink-0 place-items-center rounded-xl text-muted-foreground transition-colors hover:bg-foreground/5 md:hidden">
+          <Search className="h-4 w-4" strokeWidth={1.75} />
         </button>
 
         <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
@@ -221,7 +221,7 @@ function Topbar() {
           <span className="mx-1 hidden h-5 w-px bg-border/70 sm:block" aria-hidden="true" />
 
           <div className="ml-1 flex shrink-0 cursor-pointer items-center gap-2 rounded-lg py-1.5 pl-1.5 pr-2 transition-colors hover:bg-foreground/5 sm:ml-0 sm:gap-3 sm:pr-3">
-            <div className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-[color:var(--accent-soft)] to-[color:var(--accent-strong)] font-serif text-base text-[color:var(--accent-foreground)]">
+            <div className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-gold-soft to-gold-deep font-serif text-base text-primary-foreground">
               D
             </div>
             <div className="hidden text-right leading-tight md:block">
