@@ -100,11 +100,11 @@ function Sidebar() {
     <aside className="sticky top-0 hidden h-screen w-72 shrink-0 border-r border-border/60 bg-card/40 backdrop-blur-xl lg:flex lg:flex-col">
       <Link to="/" className="flex items-center gap-2.5 border-b border-border/60 px-6 py-5">
         <div className="grid h-10 w-10 place-items-center rounded-lg border border-gold/30 bg-gradient-to-br from-gold-soft/20 to-transparent">
-          <span className="font-serif text-xl italic leading-none text-gold">N</span>
+          <span className="text-lg font-bold leading-none text-gold">N</span>
         </div>
         <div className="leading-tight">
-          <div className="font-serif text-xl tracking-tight">NodeKPT</div>
-          <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">Buy & Sell VPS</div>
+          <div className="text-lg font-bold tracking-tight">NodeKPT</div>
+          <div className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">Buy & Sell VPS</div>
         </div>
       </Link>
 
