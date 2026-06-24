@@ -386,8 +386,8 @@ function MyVPS() {
     <section className="mt-8 rounded-2xl border border-border bg-card/40 p-7">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-serif text-2xl tracking-tight">My VPS</h2>
-          <p className="text-xs text-muted-foreground">Active servers you control directly via the integrated panel</p>
+          <h2 className="text-xl font-bold tracking-tight">My VPS</h2>
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">Active servers you control directly via the integrated panel</p>
         </div>
         <a href="#" className="inline-flex items-center gap-1.5 text-sm text-gold-deep hover:gap-2.5 transition-all">
           View All <ArrowRight className="h-4 w-4" />
