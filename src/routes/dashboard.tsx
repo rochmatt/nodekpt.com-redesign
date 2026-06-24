@@ -284,17 +284,17 @@ function Stats() {
     { label: "Total VPS", value: "0", icon: HardDrive, hint: "Across all sellers", iconColor: "text-violet-600", ringColor: "border-violet-500/30 bg-violet-500/10" },
   ];
   return (
-    <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mt-6 grid gap-3 grid-cols-2 sm:mt-10 sm:gap-4 lg:grid-cols-4">
       {stats.map((s) => (
         <div
           key={s.label}
-          className="card-interactive group relative overflow-hidden p-6"
+          className="card-interactive group relative overflow-hidden p-4 sm:p-6"
         >
           <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-gold/5 blur-2xl transition-opacity group-hover:bg-gold/10" />
 
-          <div className="relative flex items-start justify-between">
-            <div className={`grid h-11 w-11 place-items-center rounded-xl border ${s.ringColor}`}>
-              <s.icon className={`h-5 w-5 ${s.iconColor}`} />
+          <div className="relative flex items-start justify-between gap-2">
+            <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border sm:h-11 sm:w-11 ${s.ringColor}`}>
+              <s.icon className={`h-4 w-4 sm:h-5 sm:w-5 ${s.iconColor}`} />
             </div>
             {s.trend && (
               <span className="inline-flex items-center gap-1 rounded-full border border-emerald-600/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
@@ -302,11 +302,11 @@ function Stats() {
               </span>
             )}
           </div>
-          <div className="relative mt-6 text-4xl font-bold leading-none tracking-tight">
+          <div className="relative mt-4 text-2xl font-bold leading-none tracking-tight sm:mt-6 sm:text-4xl">
             {s.value}
           </div>
-          <div className="relative mt-4 flex items-center justify-between">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/70">{s.label}</div>
+          <div className="relative mt-3 flex items-center justify-between sm:mt-4">
+            <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground/70 sm:text-[11px]">{s.label}</div>
           </div>
           <div className="relative mt-1 text-[11px] leading-relaxed text-foreground/60">{s.hint}</div>
         </div>
