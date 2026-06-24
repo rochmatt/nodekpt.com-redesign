@@ -197,28 +197,30 @@ function Topbar() {
           <input
             type="text"
             placeholder="Search VPS, Bare Metal, or Proxy..."
-            className="h-10 w-full rounded-xl border border-border bg-card/60 pl-10 pr-4 text-sm outline-none placeholder:text-muted-foreground focus:border-gold/40"
+            className="h-10 w-full rounded-xl border border-border bg-card/60 pl-10 pr-4 text-sm outline-none placeholder:text-muted-foreground focus:border-[color:var(--accent)]/40 focus:ring-1 focus:ring-[color:var(--accent)]/10"
           />
           <span className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md border border-border bg-background/60 px-1.5 py-0.5 text-[10px] text-muted-foreground">
             ⌘K
           </span>
         </div>
 
-        <button className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-border bg-card/60 md:hidden">
-          <Search className="h-4 w-4 text-foreground/70" />
+        <button className="grid h-10 w-10 shrink-0 place-items-center rounded-xl text-muted-foreground transition-colors hover:bg-foreground/5 md:hidden">
+          <Search className="h-4 w-4" strokeWidth={1.75} />
         </button>
 
-        <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
-          <IconButton icon={ShoppingCart} badge="3" iconColor="text-amber-600" />
-          <IconButton icon={MessageSquare} iconColor="text-blue-600" />
-          <button className="hidden h-10 items-center gap-1.5 rounded-xl border border-border bg-card/60 px-3 text-sm font-semibold text-foreground/80 transition-colors hover:text-foreground sm:flex">
-            <Globe className="h-4 w-4 text-indigo-600" />
+        <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
+          <IconButton icon={ShoppingCart} badge="3" />
+          <IconButton icon={MessageSquare} />
+          <button className="hidden h-9 items-center gap-1.5 rounded-lg px-2 text-sm font-medium text-foreground/70 transition-colors hover:bg-foreground/5 hover:text-foreground sm:flex">
+            <Globe className="h-4 w-4" strokeWidth={1.75} />
             EN
-            <ChevronDown className="h-3.5 w-3.5" />
+            <ChevronDown className="h-3.5 w-3.5 text-foreground/50" strokeWidth={1.75} />
           </button>
-          <IconButton icon={Bell} badge="99+" iconColor="text-rose-600" />
+          <IconButton icon={Bell} badge="99+" />
 
-          <div className="ml-1 flex shrink-0 items-center gap-2 rounded-xl border border-border bg-card/60 py-1.5 pl-1.5 pr-2 sm:ml-2 sm:gap-3 sm:pr-3">
+          <span className="mx-1 hidden h-5 w-px bg-border/70 sm:block" aria-hidden="true" />
+
+          <div className="ml-1 flex shrink-0 cursor-pointer items-center gap-2 rounded-lg py-1.5 pl-1.5 pr-2 transition-colors hover:bg-foreground/5 sm:ml-0 sm:gap-3 sm:pr-3">
             <div className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-gold-soft to-gold-deep font-serif text-base text-primary-foreground">
               D
             </div>
@@ -226,7 +228,7 @@ function Topbar() {
               <div className="text-sm font-semibold text-foreground">Demo Buyer</div>
               <div className="text-[10px] text-foreground/60">buyer@nodekpt.com</div>
             </div>
-            <ChevronDown className="hidden h-3.5 w-3.5 text-foreground/60 sm:block" />
+            <ChevronDown className="hidden h-3.5 w-3.5 text-foreground/50 sm:block" strokeWidth={1.75} />
           </div>
         </div>
       </div>
@@ -237,17 +239,15 @@ function Topbar() {
 function IconButton({
   icon: Icon,
   badge,
-  iconColor = "text-foreground/70",
 }: {
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   badge?: string;
-  iconColor?: string;
 }) {
   return (
-    <button className="relative grid h-10 w-10 place-items-center rounded-xl border border-border bg-card/60 transition-colors hover:border-gold/30">
-      <Icon className={`h-4 w-4 ${iconColor}`} />
+    <button className="relative grid h-9 w-9 place-items-center rounded-lg text-foreground/70 transition-colors hover:bg-foreground/5 hover:text-foreground sm:h-10 sm:w-10">
+      <Icon className="h-[18px] w-[18px] sm:h-5 sm:w-5" strokeWidth={1.75} />
       {badge && (
-        <span className="absolute -right-1 -top-1 grid h-4 min-w-4 place-items-center rounded-full bg-gradient-to-b from-gold-soft to-gold-deep px-1 text-[9px] font-semibold text-primary-foreground">
+        <span className="absolute right-1 top-1 grid h-3.5 min-w-3.5 place-items-center rounded-full bg-[color:var(--badge-notification)] px-1 text-[8px] font-semibold leading-none text-white">
           {badge}
         </span>
       )}
