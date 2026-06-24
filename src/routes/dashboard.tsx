@@ -398,7 +398,7 @@ function ReferralCard() {
 /* ---------- MY VPS ---------- */
 function MyVPS() {
   return (
-    <section className="mt-8 rounded-2xl border border-border bg-card/40 p-7">
+    <section className="card-surface mt-8 p-7">
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold tracking-tight">My VPS</h2>
