@@ -399,6 +399,32 @@ function ReferralCard() {
   );
 }
 
+/* ---------- EMPTY STATE ---------- */
+function EmptyState({
+  icon: Icon,
+  title,
+  description,
+  cta,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  cta?: React.ReactNode;
+}) {
+  return (
+    <div className="mt-6 grid place-items-center rounded-xl border border-dashed border-border/80 bg-background/60 px-4 py-10 text-center sm:mt-8 sm:py-16">
+      <div className="grid h-14 w-14 place-items-center rounded-xl border border-[color:var(--accent)]/30 bg-[color:var(--accent-tint)]">
+        <Icon className="h-6 w-6 text-[color:var(--accent)]" />
+      </div>
+      <h3 className="mt-5 text-lg font-bold tracking-tight">{title}</h3>
+      <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
+        {description}
+      </p>
+      {cta && <div className="mt-6">{cta}</div>}
+    </div>
+  );
+}
+
 /* ---------- MY VPS ---------- */
 function MyVPS() {
   return (
