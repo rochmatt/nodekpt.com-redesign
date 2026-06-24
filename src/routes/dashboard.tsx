@@ -262,8 +262,8 @@ function Header() {
           The first marketplace where anyone can sell VPSes and buyers get direct server control via an integrated panel — no long contracts, pay in IDR (QRIS, VA), full root access.
         </p>
       </div>
-      <button className="group inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-medium transition-colors hover:border-gold/30 hover:text-gold-deep">
-        <Store className="h-4 w-4 text-gold-deep" />
+      <button className="btn-secondary">
+        <Store className="h-4 w-4 text-[color:var(--accent-strong)]" />
         Browse VPS
         <ArrowUpRight className="h-3.5 w-3.5" />
       </button>
