@@ -374,7 +374,7 @@ function WalletCard() {
 /* ---------- REFERRAL ---------- */
 function ReferralCard() {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-border bg-card/60 p-7">
+    <div className="card-surface relative overflow-hidden p-7">
       <div className="absolute -bottom-12 -right-12 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
       <div className="relative">
         <HeartHandshake className="h-6 w-6 text-gold" />
