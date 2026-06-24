@@ -462,14 +462,18 @@ function RecentOrders() {
               <tr key={i} className="border-b border-border/40 transition-colors last:border-0 hover:bg-gold/[0.03]">
                 <td className="px-7 py-5">
                   <div className="flex items-center gap-3">
-                    <div className="grid h-9 w-9 place-items-center rounded-lg border border-border bg-background/40">
-                      {o.pkg.includes("Bare") ? (
-                        <HardDrive className="h-4 w-4 text-gold" />
-                      ) : (
-                        <Server className="h-4 w-4 text-gold" />
-                      )}
-                    </div>
-                    <span className="font-medium">{o.pkg}</span>
+                    {(() => {
+                      const isBare = o.pkg.includes("Bare");
+                      const isProxy = o.pkg.toLowerCase().includes("residential") || o.pkg.toLowerCase().includes("proxy");
+                      const Icon = isBare ? HardDrive : isProxy ? Globe : Server;
+                      const color = isBare ? "text-violet-600 border-violet-500/30 bg-violet-500/10" : isProxy ? "text-indigo-600 border-indigo-500/30 bg-indigo-500/10" : "text-sky-600 border-sky-500/30 bg-sky-500/10";
+                      return (
+                        <div className={`grid h-9 w-9 place-items-center rounded-lg border ${color}`}>
+                          <Icon className="h-4 w-4" />
+                        </div>
+                      );
+                    })()}
+                    <span className="font-semibold text-foreground">{o.pkg}</span>
                   </div>
                 </td>
                 <td className="px-7 py-5 text-muted-foreground">{o.seller}</td>
