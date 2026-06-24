@@ -143,7 +143,7 @@ function NavGroup({
 }) {
   return (
     <div className="mb-6">
-      <div className="px-3 pb-2 text-[10px] uppercase tracking-[0.28em] text-muted-foreground/70">
+      <div className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/70">
         {title}
       </div>
       <ul className="space-y-0.5">
