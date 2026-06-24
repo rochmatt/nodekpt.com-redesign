@@ -272,10 +272,10 @@ function Header() {
 /* ---------- STATS ---------- */
 function Stats() {
   const stats = [
-    { label: "Active VPS", value: "0", icon: Server, hint: "Deploy in under 60 seconds" },
-    { label: "Total Orders", value: "60", icon: Package, hint: "+4 this week", trend: true },
-    { label: "Pending Orders", value: "1", icon: Clock, hint: "Awaiting payment (QRIS / VA)" },
-    { label: "Total VPS", value: "0", icon: HardDrive, hint: "Across all sellers" },
+    { label: "Active VPS", value: "0", icon: Server, hint: "Deploy in under 60 seconds", iconColor: "text-sky-600", ringColor: "border-sky-500/30 bg-sky-500/10" },
+    { label: "Total Orders", value: "60", icon: Package, hint: "+4 this week", trend: true, iconColor: "text-amber-600", ringColor: "border-amber-500/30 bg-amber-500/10" },
+    { label: "Pending Orders", value: "1", icon: Clock, hint: "Awaiting payment (QRIS / VA)", iconColor: "text-orange-600", ringColor: "border-orange-500/30 bg-orange-500/10" },
+    { label: "Total VPS", value: "0", icon: HardDrive, hint: "Across all sellers", iconColor: "text-violet-600", ringColor: "border-violet-500/30 bg-violet-500/10" },
   ];
   return (
     <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -286,11 +286,11 @@ function Stats() {
         >
           <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-gold/5 blur-2xl transition-opacity group-hover:bg-gold/10" />
           <div className="relative flex items-start justify-between">
-            <div className="grid h-11 w-11 place-items-center rounded-xl border border-gold/30 bg-gold/5">
-              <s.icon className="h-5 w-5 text-gold" />
+            <div className={`grid h-11 w-11 place-items-center rounded-xl border ${s.ringColor}`}>
+              <s.icon className={`h-5 w-5 ${s.iconColor}`} />
             </div>
             {s.trend && (
-              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-600/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-700">
+              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-600/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
                 <TrendingUp className="h-3 w-3" /> +12%
               </span>
             )}
@@ -299,9 +299,9 @@ function Stats() {
             {s.value}
           </div>
           <div className="relative mt-4 flex items-center justify-between">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">{s.label}</div>
+            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/70">{s.label}</div>
           </div>
-          <div className="relative mt-1 text-[11px] leading-relaxed text-muted-foreground/80">{s.hint}</div>
+          <div className="relative mt-1 text-[11px] leading-relaxed text-foreground/60">{s.hint}</div>
         </div>
       ))}
     </div>
