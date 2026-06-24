@@ -424,8 +424,8 @@ function RecentOrders() {
     <section className="mt-8 overflow-hidden rounded-2xl border border-border bg-card/40">
       <div className="flex items-center justify-between border-b border-border/60 p-7">
         <div>
-          <h2 className="font-serif text-2xl tracking-tight">Recent Orders</h2>
-          <p className="text-xs text-muted-foreground">Latest deploys across VPS, Bare Metal, and Proxy</p>
+          <h2 className="text-xl font-bold tracking-tight">Recent Orders</h2>
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">Latest deploys across VPS, Bare Metal, and Proxy</p>
         </div>
         <a href="#" className="inline-flex items-center gap-1.5 text-sm text-gold hover:gap-2.5 transition-all">
           View All <ArrowRight className="h-4 w-4" />
