@@ -483,9 +483,9 @@ function RecentOrders() {
 
 function StatusPill({ status }: { status: string }) {
   const map: Record<string, string> = {
-    ACTIVE: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
-    CANCELLED: "border-red-500/30 bg-red-500/10 text-red-400",
-    PENDING: "border-gold/40 bg-gold/10 text-gold",
+    ACTIVE: "border-emerald-600/30 bg-emerald-500/10 text-emerald-700",
+    CANCELLED: "border-red-600/30 bg-red-500/10 text-red-700",
+    PENDING: "border-gold/40 bg-gold/10 text-gold-deep",
   };
   return (
     <span
