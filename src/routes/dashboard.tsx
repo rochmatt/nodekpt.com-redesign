@@ -253,12 +253,12 @@ function IconButton({
 /* ---------- HEADER ---------- */
 function Header() {
   return (
-    <div className="flex flex-wrap items-end justify-between gap-6">
-      <div>
+    <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-6">
+      <div className="min-w-0">
         <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold-deep">
           <Sparkles className="h-3 w-3" /> Buy & Sell VPS Servers
         </div>
-        <h1 className="mt-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl">
+        <h1 className="mt-4 text-2xl font-bold leading-[1.1] tracking-tight sm:text-3xl md:text-4xl">
           Welcome back,{" "}
           <span className="text-gold-gradient">Demo Buyer</span>.
         </h1>
@@ -266,7 +266,7 @@ function Header() {
           The first marketplace where anyone can sell VPSes and buyers get direct server control via an integrated panel — no long contracts, pay in IDR (QRIS, VA), full root access.
         </p>
       </div>
-      <button className="btn-secondary">
+      <button className="btn-secondary self-start sm:self-auto">
         <Store className="h-4 w-4 text-[color:var(--accent-strong)]" />
         Browse VPS
         <ArrowUpRight className="h-3.5 w-3.5" />
