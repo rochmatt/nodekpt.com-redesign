@@ -324,7 +324,7 @@ function WalletCard() {
         </div>
 
         <div className="min-w-[240px] flex-1 rounded-xl border border-border bg-background/40 p-4 backdrop-blur">
-          <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
             Recent Refunds
           </div>
           <ul className="mt-3 space-y-2.5 text-sm">
