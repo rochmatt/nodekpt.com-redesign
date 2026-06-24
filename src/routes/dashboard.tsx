@@ -318,18 +318,18 @@ function Stats() {
 /* ---------- WALLET CARD ---------- */
 function WalletCard() {
   return (
-    <div className="card-feature relative overflow-hidden p-7 lg:col-span-2">
+    <div className="card-feature relative overflow-hidden p-5 sm:p-7 lg:col-span-2">
       <div className="constellation absolute inset-0 opacity-50" aria-hidden />
       <div className="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-gold/15 blur-3xl" aria-hidden />
 
-      <div className="relative flex flex-wrap items-start justify-between gap-6">
-        <div>
+      <div className="relative flex flex-col gap-6 md:flex-row md:flex-wrap md:items-start md:justify-between">
+        <div className="min-w-0">
           <div className="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-deep">
             <Wallet className="h-3.5 w-3.5" /> Wallet Balance
           </div>
           <div className="mt-3 flex items-baseline gap-1.5">
-            <span className="text-xl font-semibold text-muted-foreground">Rp</span>
-            <span className="text-5xl font-bold tracking-tight leading-none text-gold-gradient">618.147</span>
+            <span className="text-lg font-semibold text-muted-foreground sm:text-xl">Rp</span>
+            <span className="text-4xl font-bold tracking-tight leading-none text-gold-gradient sm:text-5xl">618.147</span>
           </div>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Usable for your next deploy — VPS, Bare Metal, or Proxy</p>
           <div className="mt-5 flex flex-wrap gap-2">
@@ -342,7 +342,7 @@ function WalletCard() {
           </div>
         </div>
 
-        <div className="min-w-[240px] flex-1 rounded-xl border border-border bg-background/40 p-4 backdrop-blur">
+        <div className="w-full min-w-0 flex-1 rounded-xl border border-border bg-background/40 p-4 backdrop-blur md:min-w-[240px]">
           <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
             Recent Refunds
           </div>
