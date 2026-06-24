@@ -385,7 +385,7 @@ function ReferralCard() {
         </p>
         <div className="mt-5 flex items-center gap-2 rounded-lg border border-border bg-background/40 p-1 pl-3">
           <span className="font-mono text-sm text-gold">nodekpt.com/r/demo</span>
-          <button className="ml-auto rounded-md bg-gradient-to-b from-gold-soft to-gold-deep px-3 py-1.5 text-xs text-primary-foreground">
+          <button className="btn-primary ml-auto !py-1.5 !px-3 !text-xs">
             Copy
           </button>
         </div>
