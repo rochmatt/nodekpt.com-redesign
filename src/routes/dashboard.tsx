@@ -413,18 +413,16 @@ function MyVPS() {
         </a>
       </div>
 
-      <div className="mt-6 grid place-items-center rounded-xl border border-dashed border-border/80 bg-background/60 px-4 py-10 text-center sm:mt-8 sm:py-16">
-        <div className="grid h-14 w-14 place-items-center rounded-xl border border-gold/30 bg-gold/5">
-          <Server className="h-6 w-6 text-gold-deep" />
-        </div>
-        <h3 className="mt-5 text-lg font-bold tracking-tight">No active VPS yet</h3>
-        <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-          Choose a VPS from trusted sellers — Jakarta, Singapore, Tokyo, Frankfurt, New York, or London.
-        </p>
-        <button className="btn-primary mt-6">
-          Browse Marketplace <ArrowRight className="h-4 w-4" />
-        </button>
-      </div>
+      <EmptyState
+        icon={Server}
+        title="No active VPS yet"
+        description="Choose a VPS from trusted sellers — Jakarta, Singapore, Tokyo, Frankfurt, New York, or London."
+        cta={
+          <button className="btn-primary">
+            Browse Marketplace <ArrowRight className="h-4 w-4" />
+          </button>
+        }
+      />
     </section>
   );
 }
