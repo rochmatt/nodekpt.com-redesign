@@ -81,7 +81,7 @@ export function Sidebar({ activeLabel = "Dashboard" }: { activeLabel?: string })
     { icon: Store, label: "Marketplace", href: "/marketplace" },
     { icon: Globe, label: "Proxy Services", href: "#" },
     { icon: Server, label: "Compute (VPS)", href: "#" },
-    { icon: HardDrive, label: "Bare Metal Servers", href: "#" },
+    { icon: HardDrive, label: "Bare Metal Servers", href: "/bare-metal" },
     { icon: Download, label: "Winstaller", href: "#" },
   ];
   const inventory = [
