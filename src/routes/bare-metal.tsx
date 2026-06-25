@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { fallback, zodValidator } from "@tanstack/zod-adapter";
+import { z } from "zod";
 import {
   Activity,
+  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   CheckCircle2,
@@ -15,6 +18,7 @@ import {
   Network,
   Plug,
   Radio,
+  RotateCcw,
   Search,
   Server,
   Shield,
@@ -25,11 +29,26 @@ import {
   Thermometer,
   Timer,
   Wifi,
+  X,
   Zap,
 } from "lucide-react";
 import { Sidebar, Topbar } from "./dashboard";
 
+const CPU_FILTERS = ["All", "Intel", "AMD", "GPU", "Unmetered"] as const;
+const REGION_FILTERS = ["All", "FRA-3", "AMS-2", "SIN-1", "TYO-1", "NYC-1", "SFO-1"] as const;
+const RAM_FILTERS = ["All", "64", "128", "256", "512"] as const;
+const PAGE_SIZE = 4;
+
+const filterSchema = z.object({
+  cpu: fallback(z.enum(CPU_FILTERS), "All").default("All"),
+  region: fallback(z.enum(REGION_FILTERS), "All").default("All"),
+  ram: fallback(z.enum(RAM_FILTERS), "All").default("All"),
+  q: fallback(z.string(), "").default(""),
+  page: fallback(z.number().int().min(1), 1).default(1),
+});
+
 export const Route = createFileRoute("/bare-metal")({
+  validateSearch: zodValidator(filterSchema),
   head: () => ({
     meta: [
       { title: "Bare Metal — NodeKPT · Dedicated Hardware, Hourly or Monthly" },
@@ -456,28 +475,77 @@ function DatacenterStrip() {
 }
 
 /* ============== INVENTORY TABLE ============== */
+function matchesCpu(r: Row, f: (typeof CPU_FILTERS)[number]) {
+  if (f === "All") return true;
+  if (f === "Intel") return r.cpu.includes("Intel");
+  if (f === "AMD") return r.cpu.includes("AMD");
+  if (f === "GPU") return Boolean(r.gpu);
+  if (f === "Unmetered") return r.net.toLowerCase().includes("unmetered") || r.net.includes("25");
+  return true;
+}
+
+function useFilteredRows() {
+  const { cpu, region, ram, q } = Route.useSearch();
+  const needle = q.trim().toLowerCase();
+  return ROWS.filter((r) => {
+    if (!matchesCpu(r, cpu)) return false;
+    if (region !== "All" && r.region !== region) return false;
+    if (ram !== "All" && !r.ram.startsWith(ram)) return false;
+    if (needle) {
+      const hay = `${r.cpu} ${r.ram} ${r.disk} ${r.region} ${r.net} ${r.gpu ?? ""}`.toLowerCase();
+      if (!hay.includes(needle)) return false;
+    }
+    return true;
+  });
+}
+
 function InventoryHeader() {
+  const search = Route.useSearch();
+  const navigate = Route.useNavigate();
+  const filtered = useFilteredRows();
+  const isDirty =
+    search.cpu !== "All" ||
+    search.region !== "All" ||
+    search.ram !== "All" ||
+    search.q !== "" ||
+    search.page !== 1;
+
   return (
     <section id="inventory" className="mt-12">
       <SectionHeader
         eyebrow="Step 3 · Browse inventory"
         title="Live bare metal inventory"
-        subtitle="218 servers ready to deploy now. Filter, sort, and reserve in one click."
+        subtitle={`${filtered.length} of ${ROWS.length} servers match — filters are saved in your URL so you can share or bookmark them.`}
       />
       <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative w-full sm:max-w-sm">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input
+            value={search.q}
+            onChange={(e) =>
+              navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, q: e.target.value, page: 1 }), replace: true })
+            }
             placeholder="Search CPU, region, RAM…"
-            className="h-11 w-full rounded-xl border border-border bg-card/70 pl-10 pr-3 text-sm outline-none focus:border-[color:var(--accent)]/40"
+            className="h-11 w-full rounded-xl border border-border bg-card/70 pl-10 pr-9 text-sm outline-none focus:border-[color:var(--accent)]/40"
           />
+          {search.q && (
+            <button
+              type="button"
+              onClick={() => navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, q: "", page: 1 }), replace: true })}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-muted-foreground hover:bg-foreground/5"
+              aria-label="Clear search"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          )}
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          {["All", "Intel", "AMD", "GPU", "Unmetered"].map((t, i) => (
+          {CPU_FILTERS.map((t) => (
             <button
               key={t}
+              onClick={() => navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, cpu: t, page: 1 }) })}
               className={`h-9 rounded-lg border px-3 text-[12px] font-semibold transition-colors ${
-                i === 0
+                search.cpu === t
                   ? "border-[color:var(--accent)]/40 bg-[color:var(--accent-tint)] text-[color:var(--accent-strong)]"
                   : "border-border bg-card/60 text-foreground/70 hover:border-[color:var(--accent)]/30"
               }`}
@@ -487,7 +555,80 @@ function InventoryHeader() {
           ))}
         </div>
       </div>
+
+      <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap items-center gap-2">
+          <FilterGroup
+            icon={MapPin}
+            label="Region"
+            options={REGION_FILTERS}
+            value={search.region}
+            onChange={(v) => navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, region: v, page: 1 }) })}
+          />
+          <FilterGroup
+            icon={MemoryStick}
+            label="RAM ≥"
+            options={RAM_FILTERS}
+            value={search.ram}
+            onChange={(v) => navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, ram: v, page: 1 }) })}
+            suffix={(o) => (o === "All" ? "" : " GB")}
+          />
+        </div>
+        {isDirty && (
+          <button
+            onClick={() =>
+              navigate({
+                search: { cpu: "All", region: "All", ram: "All", q: "", page: 1 },
+              })
+            }
+            className="inline-flex h-9 items-center gap-1.5 self-start rounded-lg border border-border bg-card/60 px-3 text-[12px] font-semibold text-foreground/70 transition-colors hover:border-[color:var(--accent)]/30 hover:text-foreground"
+          >
+            <RotateCcw className="h-3.5 w-3.5" /> Reset filters
+          </button>
+        )}
+      </div>
     </section>
+  );
+}
+
+function FilterGroup<T extends string>({
+  icon: Icon,
+  label,
+  options,
+  value,
+  onChange,
+  suffix,
+}: {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  label: string;
+  options: readonly T[];
+  value: T;
+  onChange: (v: T) => void;
+  suffix?: (o: T) => string;
+}) {
+  return (
+    <div className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card/40 p-1 pl-2.5">
+      <Icon className="h-3.5 w-3.5 text-[color:var(--accent-strong)]" strokeWidth={1.75} />
+      <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+        {label}
+      </span>
+      <div className="ml-1 flex flex-wrap gap-1">
+        {options.map((o) => (
+          <button
+            key={o}
+            onClick={() => onChange(o)}
+            className={`h-7 rounded-md px-2 text-[11px] font-semibold transition-colors ${
+              value === o
+                ? "bg-[color:var(--accent-tint)] text-[color:var(--accent-strong)]"
+                : "text-foreground/65 hover:bg-foreground/5"
+            }`}
+          >
+            {o}
+            {suffix ? suffix(o) : ""}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -515,6 +656,14 @@ const ROWS: Row[] = [
 ];
 
 function ServerTable() {
+  const search = Route.useSearch();
+  const navigate = Route.useNavigate();
+  const filtered = useFilteredRows();
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const page = Math.min(search.page, totalPages);
+  const start = (page - 1) * PAGE_SIZE;
+  const visible = filtered.slice(start, start + PAGE_SIZE);
+
   return (
     <div className="card-surface mt-5 overflow-hidden p-0">
       {/* Desktop table */}
@@ -529,7 +678,12 @@ function ServerTable() {
           <span className="text-right">Price</span>
           <span />
         </div>
-        {ROWS.map((r, i) => (
+        {visible.length === 0 && (
+          <div className="px-5 py-10 text-center text-sm text-muted-foreground">
+            No servers match the current filters.
+          </div>
+        )}
+        {visible.map((r, i) => (
           <div
             key={i}
             className="group grid grid-cols-[1.6fr_0.9fr_1.1fr_1.3fr_0.9fr_0.9fr_1fr_auto] items-center gap-3 border-b border-border/60 px-5 py-3.5 text-[13px] transition-colors last:border-b-0 hover:bg-[color:var(--accent-tint)]/40"
@@ -564,7 +718,12 @@ function ServerTable() {
 
       {/* Mobile cards */}
       <div className="divide-y divide-border/60 lg:hidden">
-        {ROWS.map((r, i) => (
+        {visible.length === 0 && (
+          <div className="p-6 text-center text-sm text-muted-foreground">
+            No servers match the current filters.
+          </div>
+        )}
+        {visible.map((r, i) => (
           <div key={i} className="p-4">
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0">
@@ -595,11 +754,31 @@ function ServerTable() {
         ))}
       </div>
 
-      <div className="flex items-center justify-between border-t border-border bg-foreground/[0.02] px-5 py-3">
-        <span className="text-[11px] text-muted-foreground">Showing 6 of 218</span>
-        <a href="#" className="inline-flex items-center gap-1 text-[12px] font-semibold text-[color:var(--accent-strong)] hover:underline">
-          View all servers <ArrowUpRight className="h-3 w-3" />
-        </a>
+      <div className="flex items-center justify-between gap-3 border-t border-border bg-foreground/[0.02] px-5 py-3">
+        <span className="text-[11px] text-muted-foreground">
+          {filtered.length === 0
+            ? "No results"
+            : `Showing ${start + 1}–${Math.min(start + PAGE_SIZE, filtered.length)} of ${filtered.length}`}
+        </span>
+        <div className="flex items-center gap-1.5">
+          <button
+            disabled={page <= 1}
+            onClick={() => navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, page: Math.max(1, p.page - 1) }) })}
+            className="inline-flex h-8 items-center gap-1 rounded-md border border-border bg-card/60 px-2.5 text-[11px] font-semibold text-foreground/75 transition-colors hover:border-[color:var(--accent)]/30 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            <ArrowLeft className="h-3 w-3" /> Prev
+          </button>
+          <span className="px-1 font-mono text-[11px] text-muted-foreground">
+            {page} / {totalPages}
+          </span>
+          <button
+            disabled={page >= totalPages}
+            onClick={() => navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, page: Math.min(totalPages, p.page + 1) }) })}
+            className="inline-flex h-8 items-center gap-1 rounded-md border border-border bg-card/60 px-2.5 text-[11px] font-semibold text-foreground/75 transition-colors hover:border-[color:var(--accent)]/30 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            Next <ArrowRight className="h-3 w-3" />
+          </button>
+        </div>
       </div>
     </div>
   );
