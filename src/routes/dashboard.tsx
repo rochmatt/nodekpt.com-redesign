@@ -54,7 +54,7 @@ function Dashboard() {
       <div className="radial-glow pointer-events-none fixed left-1/3 top-0 h-[600px] w-[900px] -translate-x-1/2" aria-hidden />
 
       <div className="relative flex">
-        <Sidebar />
+        <Sidebar activeLabel="Dashboard" />
         <main className="min-w-0 flex-1">
           <Topbar />
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
@@ -75,14 +75,14 @@ function Dashboard() {
 }
 
 /* ---------- SIDEBAR ---------- */
-function Sidebar() {
+export function Sidebar({ activeLabel = "Dashboard" }: { activeLabel?: string }) {
   const overview = [
-    { icon: LayoutDashboard, label: "Dashboard", active: true },
-    { icon: Store, label: "Marketplace" },
-    { icon: Globe, label: "Proxy Services" },
-    { icon: Server, label: "Compute (VPS)" },
-    { icon: HardDrive, label: "Bare Metal Servers" },
-    { icon: Download, label: "Winstaller" },
+    { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
+    { icon: Store, label: "Marketplace", href: "/marketplace" },
+    { icon: Globe, label: "Proxy Services", href: "#" },
+    { icon: Server, label: "Compute (VPS)", href: "#" },
+    { icon: HardDrive, label: "Bare Metal Servers", href: "#" },
+    { icon: Download, label: "Winstaller", href: "#" },
   ];
   const inventory = [
     { icon: Database, label: "Object Storage" },
@@ -128,9 +128,9 @@ function Sidebar() {
           <ArrowRight className="h-3.5 w-3.5 shrink-0 text-[color:var(--accent-strong)] transition-transform group-hover:translate-x-0.5" />
         </button>
 
-        <NavGroup title="Platform Overview" items={overview} />
-        <NavGroup title="Service Inventory" items={inventory} />
-        <NavGroup title="Account" items={account} />
+        <NavGroup title="Platform Overview" items={overview} activeLabel={activeLabel} />
+        <NavGroup title="Service Inventory" items={inventory} activeLabel={activeLabel} />
+        <NavGroup title="Account" items={account} activeLabel={activeLabel} />
       </div>
 
       <button className="mx-3 mb-4 flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-[color:var(--accent)]/40 hover:bg-[color:var(--accent-tint)]">
@@ -144,13 +144,15 @@ function Sidebar() {
 function NavGroup({
   title,
   items,
+  activeLabel,
 }: {
   title: string;
   items: {
     icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
     label: string;
-    active?: boolean;
+    href?: string;
   }[];
+  activeLabel?: string;
 }) {
   return (
     <div className="mb-6">
@@ -158,16 +160,15 @@ function NavGroup({
         {title}
       </div>
       <ul className="space-y-0.5">
-        {items.map(({ icon: Icon, label, active }) => (
-          <li key={label}>
-            <a
-              href="#"
-              className={`group flex items-center gap-3 rounded-lg px-3 py-2 text-[13px] font-medium transition-colors ${
-                active
-                  ? "bg-[color:var(--accent-tint)] text-foreground"
-                  : "text-foreground/85 hover:bg-[color:var(--accent-tint)]/60 hover:text-foreground"
-              }`}
-            >
+        {items.map(({ icon: Icon, label, href }) => {
+          const active = activeLabel === label;
+          const cls = `group flex items-center gap-3 rounded-lg px-3 py-2 text-[13px] font-medium transition-colors ${
+            active
+              ? "bg-[color:var(--accent-tint)] text-foreground"
+              : "text-foreground/85 hover:bg-[color:var(--accent-tint)]/60 hover:text-foreground"
+          }`;
+          const inner = (
+            <>
               <Icon
                 className={`h-[18px] w-[18px] shrink-0 ${
                   active ? "text-[color:var(--accent-strong)]" : "text-muted-foreground group-hover:text-[color:var(--accent-strong)]"
@@ -178,9 +179,18 @@ function NavGroup({
               {active && (
                 <span className="ml-auto h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
               )}
-            </a>
-          </li>
-        ))}
+            </>
+          );
+          return (
+            <li key={label}>
+              {href && href.startsWith("/") ? (
+                <Link to={href} className={cls}>{inner}</Link>
+              ) : (
+                <a href={href || "#"} className={cls}>{inner}</a>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
@@ -188,7 +198,7 @@ function NavGroup({
 
 /* ---------- TOPBAR ---------- */
 
-function Topbar() {
+export function Topbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3 sm:gap-4 sm:px-6 sm:py-4 lg:px-8">
