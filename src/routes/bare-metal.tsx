@@ -523,7 +523,7 @@ function InventoryHeader() {
           <input
             value={search.q}
             onChange={(e) =>
-              navigate({ search: (p) => ({ ...p, q: e.target.value, page: 1 }), replace: true })
+              navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, q: e.target.value, page: 1 }), replace: true })
             }
             placeholder="Search CPU, region, RAM…"
             className="h-11 w-full rounded-xl border border-border bg-card/70 pl-10 pr-9 text-sm outline-none focus:border-[color:var(--accent)]/40"
@@ -531,7 +531,7 @@ function InventoryHeader() {
           {search.q && (
             <button
               type="button"
-              onClick={() => navigate({ search: (p) => ({ ...p, q: "", page: 1 }), replace: true })}
+              onClick={() => navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, q: "", page: 1 }), replace: true })}
               className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-muted-foreground hover:bg-foreground/5"
               aria-label="Clear search"
             >
@@ -543,7 +543,7 @@ function InventoryHeader() {
           {CPU_FILTERS.map((t) => (
             <button
               key={t}
-              onClick={() => navigate({ search: (p) => ({ ...p, cpu: t, page: 1 }) })}
+              onClick={() => navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, cpu: t, page: 1 }) })}
               className={`h-9 rounded-lg border px-3 text-[12px] font-semibold transition-colors ${
                 search.cpu === t
                   ? "border-[color:var(--accent)]/40 bg-[color:var(--accent-tint)] text-[color:var(--accent-strong)]"
@@ -563,14 +563,14 @@ function InventoryHeader() {
             label="Region"
             options={REGION_FILTERS}
             value={search.region}
-            onChange={(v) => navigate({ search: (p) => ({ ...p, region: v, page: 1 }) })}
+            onChange={(v) => navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, region: v, page: 1 }) })}
           />
           <FilterGroup
             icon={MemoryStick}
             label="RAM ≥"
             options={RAM_FILTERS}
             value={search.ram}
-            onChange={(v) => navigate({ search: (p) => ({ ...p, ram: v, page: 1 }) })}
+            onChange={(v) => navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, ram: v, page: 1 }) })}
             suffix={(o) => (o === "All" ? "" : " GB")}
           />
         </div>
@@ -763,7 +763,7 @@ function ServerTable() {
         <div className="flex items-center gap-1.5">
           <button
             disabled={page <= 1}
-            onClick={() => navigate({ search: (p) => ({ ...p, page: Math.max(1, p.page - 1) }) })}
+            onClick={() => navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, page: Math.max(1, p.page - 1) }) })}
             className="inline-flex h-8 items-center gap-1 rounded-md border border-border bg-card/60 px-2.5 text-[11px] font-semibold text-foreground/75 transition-colors hover:border-[color:var(--accent)]/30 disabled:cursor-not-allowed disabled:opacity-40"
           >
             <ArrowLeft className="h-3 w-3" /> Prev
@@ -773,7 +773,7 @@ function ServerTable() {
           </span>
           <button
             disabled={page >= totalPages}
-            onClick={() => navigate({ search: (p) => ({ ...p, page: Math.min(totalPages, p.page + 1) }) })}
+            onClick={() => navigate({ search: (p: z.infer<typeof filterSchema>) => ({ ...p, page: Math.min(totalPages, p.page + 1) }) })}
             className="inline-flex h-8 items-center gap-1 rounded-md border border-border bg-card/60 px-2.5 text-[11px] font-semibold text-foreground/75 transition-colors hover:border-[color:var(--accent)]/30 disabled:cursor-not-allowed disabled:opacity-40"
           >
             Next <ArrowRight className="h-3 w-3" />
