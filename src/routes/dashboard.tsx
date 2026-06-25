@@ -75,14 +75,14 @@ function Dashboard() {
 }
 
 /* ---------- SIDEBAR ---------- */
-function Sidebar() {
+export function Sidebar({ activeLabel = "Dashboard" }: { activeLabel?: string }) {
   const overview = [
-    { icon: LayoutDashboard, label: "Dashboard", active: true },
-    { icon: Store, label: "Marketplace" },
-    { icon: Globe, label: "Proxy Services" },
-    { icon: Server, label: "Compute (VPS)" },
-    { icon: HardDrive, label: "Bare Metal Servers" },
-    { icon: Download, label: "Winstaller" },
+    { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
+    { icon: Store, label: "Marketplace", href: "/marketplace" },
+    { icon: Globe, label: "Proxy Services", href: "#" },
+    { icon: Server, label: "Compute (VPS)", href: "#" },
+    { icon: HardDrive, label: "Bare Metal Servers", href: "#" },
+    { icon: Download, label: "Winstaller", href: "#" },
   ];
   const inventory = [
     { icon: Database, label: "Object Storage" },
