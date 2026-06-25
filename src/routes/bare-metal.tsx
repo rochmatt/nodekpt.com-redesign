@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { fallback, zodValidator } from "@tanstack/zod-adapter";
+import { z } from "zod";
 import {
   Activity,
+  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   CheckCircle2,
@@ -15,6 +18,7 @@ import {
   Network,
   Plug,
   Radio,
+  RotateCcw,
   Search,
   Server,
   Shield,
@@ -25,11 +29,26 @@ import {
   Thermometer,
   Timer,
   Wifi,
+  X,
   Zap,
 } from "lucide-react";
 import { Sidebar, Topbar } from "./dashboard";
 
+const CPU_FILTERS = ["All", "Intel", "AMD", "GPU", "Unmetered"] as const;
+const REGION_FILTERS = ["All", "FRA-3", "AMS-2", "SIN-1", "TYO-1", "NYC-1", "SFO-1"] as const;
+const RAM_FILTERS = ["All", "64", "128", "256", "512"] as const;
+const PAGE_SIZE = 4;
+
+const filterSchema = z.object({
+  cpu: fallback(z.enum(CPU_FILTERS), "All").default("All"),
+  region: fallback(z.enum(REGION_FILTERS), "All").default("All"),
+  ram: fallback(z.enum(RAM_FILTERS), "All").default("All"),
+  q: fallback(z.string(), "").default(""),
+  page: fallback(z.number().int().min(1), 1).default(1),
+});
+
 export const Route = createFileRoute("/bare-metal")({
+  validateSearch: zodValidator(filterSchema),
   head: () => ({
     meta: [
       { title: "Bare Metal — NodeKPT · Dedicated Hardware, Hourly or Monthly" },
